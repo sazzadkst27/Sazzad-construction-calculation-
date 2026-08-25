@@ -1,0 +1,6 @@
+v14:
+- Added Home and Delete controls inside calculator pages.
+- Home stores shortcuts locally for this device.
+- Delete hides a calculator locally without destroying the original calculator code.
+- Added restore deleted calculators action.
+- Existing v13 calculators/theme/PWA retained.

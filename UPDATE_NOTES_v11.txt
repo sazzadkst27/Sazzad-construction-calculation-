@@ -1,0 +1,5 @@
+FINAL v11 changes:
+1. Brick Quantity: extra fields (opening/wastage/custom thickness) are optional; main length+height+wall thickness are sufficient.
+2. Added dedicated RCC Rebar Quantity calculator for slab, beam, column, footing, stair, tie beam.
+3. Unit switching helper added so labels/placeholders can be refreshed consistently.
+4. Owner Update settings added for version/update URL storage. This is a local update-control panel; true automatic remote updating requires hosting/PWA/service-worker infrastructure.

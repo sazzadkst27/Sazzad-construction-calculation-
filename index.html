@@ -1,0 +1,1046 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#0f172a">
+<title>SAZZAD Construction Calculator FINAL</title>
+<style>
+:root{--bg:#f3f6fa;--card:#fff;--text:#17202a;--muted:#64707d;--line:#dbe2ea;--accent:#f59e0b;--accent2:#0ea5e9;--danger:#ef4444;--ok:#16a34a;--shadow:0 8px 24px rgba(15,23,42,.08)}
+*{box-sizing:border-box}html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:Arial,"Noto Sans Bengali",sans-serif}
+body.dark{--bg:#0b1118;--card:#131b24;--text:#eef2f7;--muted:#9aa7b4;--line:#273442;--shadow:0 8px 28px rgba(0,0,0,.28)}
+body.blue{--accent:#2563eb;--accent2:#06b6d4} body.green{--accent:#16a34a;--accent2:#14b8a6} body.purple{--accent:#7c3aed;--accent2:#db2777}
+.app{max-width:900px;margin:auto;min-height:100vh;padding-bottom:86px}.top{position:sticky;top:0;z-index:20;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:12px 15px;display:flex;align-items:center;justify-content:space-between}
+.brand{font-weight:900}.brand span{color:var(--accent)}.sub{font-size:11px;color:var(--muted);margin-top:3px}.topBtns{display:flex;gap:6px}.iconBtn{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:10px;padding:9px 11px}
+main{padding:15px}.page{display:none}.page.active{display:block}.hero{padding:22px;border-radius:20px;background:linear-gradient(135deg,#172033,#0f172a);color:#fff;box-shadow:var(--shadow);margin-bottom:14px}.hero h1{margin:0 0 8px;font-size:25px}.hero p{margin:0 0 15px;color:#d5dde7;line-height:1.55}
+button,.select, input, textarea{font:inherit}button{border:0;border-radius:11px;padding:11px 13px;background:var(--accent);color:#111;font-weight:800}.secondary{background:var(--card);color:var(--text);border:1px solid var(--line)}.danger{background:var(--danger);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:15px;box-shadow:var(--shadow);cursor:pointer}.card .ico{font-size:25px}.card b{display:block;margin-top:8px}.card small{color:var(--muted);display:block;margin-top:4px}
+.search{margin:12px 0}.search input,.field input,.field select,.field textarea,.toolbar select{width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);outline:none}.field{margin:10px 0}.field label{display:block;color:var(--muted);font-size:13px;margin-bottom:5px}.two{display:grid;grid-template-columns:1fr 1fr;gap:8px}.three{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.toolbar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:12px}.sectionTitle{margin:18px 0 10px;font-size:18px}.back{margin-bottom:12px}.result{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);border-radius:13px;padding:14px;margin-top:14px;line-height:1.6;box-shadow:var(--shadow)}.big{font-size:27px;font-weight:900}.formula{font-size:12px;color:var(--muted);margin-top:6px}.actions{display:grid;grid-template-columns:repeat(4,1fr);gap:7px;margin-top:12px}.actions button{font-size:12px;padding:9px 5px}.notice{padding:12px;border-radius:11px;background:color-mix(in srgb,var(--accent) 10%,var(--card));border:1px solid var(--line);color:var(--muted);line-height:1.55}.warn{border-left:4px solid var(--danger);padding:12px;background:var(--card);border-radius:10px;color:var(--muted);line-height:1.55}.pill{display:inline-block;padding:5px 8px;border-radius:999px;background:var(--soft,#eef2f7);font-size:12px;margin:3px}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(900px,100%);z-index:30;background:var(--card);border-top:1px solid var(--line);display:grid;grid-template-columns:repeat(5,1fr)}.bottom button{border:0;background:transparent;color:var(--muted);border-radius:0;font-size:11px;padding:9px 2px}.bottom button.active{color:var(--accent)}
+.aiBox{min-height:180px}.chat{display:grid;gap:8px;margin-bottom:10px}.msg{padding:10px 12px;border-radius:12px;background:var(--card);border:1px solid var(--line)}.msg.user{border-left:4px solid var(--accent)}.msg.ai{border-left:4px solid var(--accent2)}
+@media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:520px){.toolbar,.two,.three{grid-template-columns:1fr}.actions{grid-template-columns:1fr 1fr}.hero h1{font-size:22px}}
+@media print{.top,.bottom,.back,.actions,.toolbar,.search,button{display:none!important}.page{display:none!important}.page.active{display:block!important}.app{max-width:none}.card,.result{box-shadow:none;background:#fff;color:#000}}
+</style>
+<style id="optional-note-v11">
+.optional-note-v11{font-size:12px;opacity:.72;margin:4px 0 8px}
+.update-box-v11{margin-top:12px;padding:12px;border:1px dashed #27ae60;border-radius:8px;background:#f8fff9}
+</style>
+<style id="v15-style">
+.v15-panel{background:#fff;border:1px solid #dfe6e9;border-radius:12px;padding:14px;margin:12px 0;box-shadow:0 2px 8px rgba(0,0,0,.04)}
+.v15-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.v15-job{border:1px solid #e5e7eb;border-radius:10px;padding:12px;margin:8px 0;background:#fbfcfd}
+.v15-job h4{margin:0 0 6px}
+.v15-badge{display:inline-block;padding:3px 7px;border-radius:99px;background:#eef8f1;color:#217a43;font-size:11px}
+.v15-btn{border:0;border-radius:8px;padding:9px 12px;cursor:pointer;font-weight:700;margin:4px 4px 0 0}
+.v15-primary{background:#27ae60;color:#fff}.v15-danger{background:#c0392b;color:#fff}.v15-muted{background:#eef2f5;color:#263238}
+@media(max-width:600px){.v15-grid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+<div><div class="brand">SAZZAD <span>CONSTRUCTION</span> CALCULATOR</div><div class="sub" id="sub">All-in-one Civil & Construction Calculator</div></div>
+<div class="topBtns"><button class="iconBtn" onclick="toggleTheme()">☼</button><button class="iconBtn" onclick="go('settings')">⚙</button></div>
+</header>
+
+<main id="home" class="page active">
+<section class="hero"><h1 id="heroTitle">সব Construction হিসাব এক জায়গায়</h1><p id="heroText">মালামাল, রড, কাঠ, ইট, মাটি, জমি, বাজেট ও Structural Guide—সব আলাদা আলাদা অপশনে।</p><button onclick="go('categories')" id="startBtn">হিসাব শুরু করুন →</button></section>
+<div class="toolbar">
+<select id="language" onchange="setLanguage(this.value)"><option value="bn">বাংলা</option><option value="en">English</option></select>
+<select id="globalUnit" onchange="setUnit(this.value)"><option value="metric">Metric — m / mm / m² / m³</option><option value="imperial">Imperial — ft / in / sq ft / CFT</option></select>
+</div>
+<div class="search"><input id="search" oninput="doSearch()" placeholder="ক্যালকুলেটর খুঁজুন..."></div>
+<h2 class="sectionTitle" id="quickTitle">দ্রুত অপশন</h2><div id="quick" class="grid"></div>
+<h2 class="sectionTitle" id="recentTitle">সাম্প্রতিক হিসাব</h2><div id="recent"></div>
+</main>
+
+<main id="categories" class="page">
+<button class="secondary back" onclick="go('home')">← <span data-t="back">ফিরে যান</span></button>
+<h2 id="catTitle">সব ক্যাটাগরি</h2><div id="categoryGrid" class="grid"></div>
+</main>
+
+<main id="listPage" class="page">
+<button class="secondary back" onclick="go('categories')">← <span data-t="back">ফিরে যান</span></button>
+<h2 id="listTitle"></h2><div id="calculatorList" class="grid"></div>
+</main>
+
+<main id="calcPage" class="page">
+<button class="secondary back" onclick="backFromCalc()">← <span data-t="back">ফিরে যান</span></button>
+<h2 id="calcTitle"></h2>
+<div class="toolbar"><select id="measureType" onchange="renderMeasureHint();renderFields(current)"></select><select id="calcUnit" onchange="updateCalcUnit()"></select></div>
+<div id="measureHint" class="notice"></div>
+<div id="calcFields"></div>
+<button id="calcButton" onclick="calculateCurrent()">হিসাব করুন</button>
+<div id="calcResult"></div>
+</main>
+
+<main id="savedPage" class="page">
+<h2 data-t="saved">সেভ করা হিসাব</h2><div id="savedList"></div>
+</main>
+
+<main id="aiPage" class="page">
+<h2>🤖 <span data-t="ai">AI Assistant</span></h2>
+<div class="notice">আপনার construction/civil engineering প্রশ্ন লিখুন। অ্যাপটি আগে built-in knowledge দিয়ে উত্তর দেবে। আসল online AI যুক্ত করতে Settings → AI Connection থেকে আপনার নিজের secure backend/API endpoint ব্যবহার করুন।</div>
+<div id="chat" class="chat"></div>
+<div class="field"><textarea id="aiQuestion" rows="4" placeholder="যেমন: ৪ তলা ভবনের footing design করতে কী কী তথ্য লাগবে?"></textarea></div>
+<button onclick="askAI()">AI-কে জিজ্ঞেস করুন</button>
+</main>
+
+<main id="settings" class="page">
+<h2 data-t="settings">সেটিংস</h2><div id="settingsBox"></div>
+</main>
+
+<nav class="bottom">
+<button id="nav-home" onclick="go('home')">⌂<br><span data-t="home">হোম</span></button>
+<button id="nav-categories" onclick="go('categories')">▦<br><span data-t="categories">ক্যালকুলেটর</span></button>
+<button id="nav-saved" onclick="go('savedPage')">★<br><span data-t="saved">সেভড</span></button>
+<button id="nav-ai" onclick="go('aiPage')">🤖<br><span data-t="ai">AI</span></button>
+<button id="nav-settings" onclick="go('settings')">⚙<br><span data-t="settings">সেটিংস</span></button>
+</nav>
+</div>
+
+<script>
+const T={
+bn:{home:"হোম",categories:"ক্যালকুলেটর",saved:"সেভড",ai:"AI Assistant",settings:"সেটিংস",back:"ফিরে যান",calculate:"হিসাব করুন",save:"সেভ",print:"প্রিন্ট",pdf:"PDF",copy:"কপি",clear:"মুছে ফেলুন",done:"সম্পন্ন",valid:"সঠিক মান দিন।",search:"ক্যালকুলেটর খুঁজুন...",quick:"দ্রুত অপশন",recent:"সাম্প্রতিক হিসাব",all:"সব ক্যাটাগরি"},
+en:{home:"Home",categories:"Calculators",saved:"Saved",ai:"AI Assistant",settings:"Settings",back:"Back",calculate:"Calculate",save:"Save",print:"Print",pdf:"PDF",copy:"Copy",clear:"Clear",done:"Done",valid:"Please enter valid values.",search:"Search calculator...",quick:"Quick Options",recent:"Recent Calculations",all:"All Categories"}
+};
+let lang=localStorage.scc_lang||"bn", unit=localStorage.scc_unit||"metric", current="", previousPage="listPage";
+
+const cats={
+"🧱 Concrete & RCC":["Concrete Volume","RCC Mix","Concrete Ingredients","Formwork Area"],
+"🔩 Rod & Steel":["Steel Weight","Rebar Quantity","Stirrup Cutting","Lap Length","Development Length","RCC Rebar","RCC Rebar Quantity"],
+"🧱 Brick & Masonry":["Brick Quantity","Brick Wall Volume","Mortar Quantity","Block Quantity"],
+"🪵 Wood":["Wood CFT","Wood m³","Wood Cost"],
+"⛏️ Soil & Earthwork":["Excavation","Backfill","Soil Volume Conversion"],
+"🎨 Finishing":["Plaster Area","Paint Quantity","Floor Tiles","Ceiling Area","Paint & Tiles"],
+"📐 Land Measurement":["Rectangle Land","Triangle Land","Trapezoid Land","Irregular Land","Unit/Area Converter"],
+"💰 Budget & BOQ":["Material Budget","Labour Cost","BOQ Item","Project Budget","Building Cost"],
+"🏢 Structural Guide":["Building Information","Footing Guide","Column Guide","Beam Guide","Slab Guide","Staircase","Load Calculator","Earthquake/Wind Guide","Structural Rebar Guide","Structural BOQ"],
+"🧰 Other Tools":["Unit Converter","Percentage","Ratio","Slope/Gradient","Number of Materials","Electrical Wire"]
+};
+
+const labels={
+bn:{
+"Concrete Volume":"Concrete Volume / ঢালাইয়ের আয়তন","RCC Mix":"RCC Mix","Concrete Ingredients":"Concrete-এর মালামাল","Formwork Area":"Formwork Area",
+"Steel Weight":"রডের ওজন","Rebar Quantity":"রডের মোট Quantity","Stirrup Cutting":"Stirrup Cutting Length","Lap Length":"Lap Length","Development Length":"Development Length",
+"Brick Quantity":"ইটের পরিমাণ (পিস)","Brick Wall Volume":"ইটের দেয়ালের Volume","Mortar Quantity":"Mortar Quantity","Block Quantity":"Block Quantity",
+"Wood CFT":"কাঠের CFT হিসাব","Wood m³":"কাঠের m³ হিসাব","Wood Cost":"কাঠের খরচ",
+"Excavation":"মাটি কাটার হিসাব","Backfill":"Backfilling হিসাব","Soil Volume Conversion":"মাটির Volume Conversion",
+"Plaster Area":"প্লাস্টারের Area","Paint Quantity":"রঙের পরিমাণ","Floor Tiles":"Floor Tiles","Ceiling Area":"Ceiling Area",
+"Rectangle Land":"আয়তাকার জমি","Triangle Land":"ত্রিভুজ জমি","Trapezoid Land":"Trapezoid জমি","Irregular Land":"অনিয়মিত জমি","Unit/Area Converter":"জমির Unit/Area Converter",
+"Material Budget":"মালামালের বাজেট","Labour Cost":"Labour Cost","BOQ Item":"BOQ Item","Project Budget":"Project Budget",
+"Building Information":"Building Information","Footing Guide":"Footing Guide","Column Guide":"Column Guide","Beam Guide":"Beam Guide","Slab Guide":"Slab Guide","Staircase":"সিঁড়ির হিসাব","Load Calculator":"Load Calculator","Earthquake/Wind Guide":"Earthquake / Wind Guide","Structural Rebar Guide":"Structural Rebar Guide","Structural BOQ":"Structural BOQ",
+"Unit Converter":"Unit Converter","Percentage":"Percentage","Ratio":"Ratio","Slope/Gradient":"Slope / Gradient","Number of Materials":"Number of Materials"
+},en:{}};
+Object.keys(labels.bn).forEach(k=>labels.en[k]=k);
+const nm=k=>labels[lang][k]||k;
+const $=id=>document.getElementById(id);
+function setLanguage(v){lang=v;localStorage.scc_lang=v;refreshUI()}
+function setUnit(v){
+  unit=v;localStorage.scc_unit=v;
+  if(current){
+    const active=document.getElementById("calcPage").classList.contains("active");
+    if(active) openCalc(current); else refreshUI();
+  } else refreshUI();
+}
+function go(id){document.querySelectorAll(".page").forEach(x=>x.classList.remove("active"));$(id).classList.add("active");document.querySelectorAll(".bottom button").forEach(x=>x.classList.remove("active"));$("nav-"+id)?.classList.add("active");if(id==="categories")renderCategories();if(id==="savedPage")renderSaved();if(id==="settings")renderSettings();if(id==="home")renderHome()}
+function openCategory(cat){previousPage="listPage";$("listTitle").textContent=cat;$("calculatorList").innerHTML=cats[cat].map(k=>`<div class="card" onclick="openCalc('${esc(k)}')"><div class="ico">📐</div><b>${nm(k)}</b><small>${lang==="bn"?"আলাদা calculator":"Separate calculator"}</small></div>`).join("");go("listPage")}
+function esc(s){return s.replace(/\\/g,"\\\\").replace(/'/g,"\\'")}
+function renderCategories(){$("categoryGrid").innerHTML=Object.keys(cats).map(c=>`<div class="card" onclick="openCategory('${esc(c)}')"><div class="ico">${c.split(" ")[0]}</div><b>${c}</b><small>${cats[c].length} ${lang==="bn"?"টি অপশন":"options"}</small></div>`).join("")}
+function renderHome(){let q=["Concrete Volume","Steel Weight","Brick Quantity","Wood CFT","Excavation","Rectangle Land","Material Budget","Footing Guide","Beam Guide","Staircase","Unit Converter","AI Assistant"];$("quick").innerHTML=q.map(k=>k==="AI Assistant"?`<div class="card" onclick="go('aiPage')"><div class="ico">🤖</div><b>AI Assistant</b></div>`:`<div class="card" onclick="openCalc('${esc(k)}')"><div class="ico">📐</div><b>${nm(k)}</b></div>`).join("");let a=JSON.parse(localStorage.scc_saved||"[]");$("recent").innerHTML=a.length?a.slice(0,5).map(x=>`<div class="card" style="margin-bottom:8px;cursor:default"><b>${x.name}</b><small>${x.date}</small><div>${x.text}</div></div>`).join(""):`<div class="notice">${T[lang].recent}: ${T[lang].valid==="সঠিক মান দিন।"?"এখনও কোনো হিসাব নেই।":"No calculations yet."}</div>`}
+function doSearch(){let q=$("search").value.toLowerCase();let all=[...new Set(Object.values(cats).flat())].filter(x=>nm(x).toLowerCase().includes(q)||x.toLowerCase().includes(q));$("quick").innerHTML=all.map(k=>`<div class="card" onclick="openCalc('${esc(k)}')"><b>${nm(k)}</b></div>`).join("")}
+function backFromCalc(){go(previousPage)}
+function optionsFor(name){
+let type="general", hint=lang==="bn"?"আপনি কী মাপতে চান/কোন ধরনের হিসাব চান নির্বাচন করুন।":"Select what you want to measure.";
+if(/^(Concrete Volume|RCC Mix|Concrete Ingredients)$/.test(name))type="concrete";
+else if(/Land|Rectangle|Triangle|Trapezoid|Irregular|Area|Plaster|Formwork|Ceiling|Tiles/.test(name))type="area";
+else if(/Volume|Excavation|Backfill|Wood/.test(name))type="volume";
+else if(/Steel|Rebar|Rod|Stirrup|Lap|Development/.test(name))type="weight";
+else if(/Cost|Budget|BOQ|Labour|Paint/.test(name))type="cost";
+else if(/Length|Slope/.test(name))type="length";
+return {type,hint}
+}
+function openCalc(name){current=name;previousPage=document.getElementById("listPage").classList.contains("active")?"listPage":"categories";$("calcTitle").textContent=nm(name);let o=optionsFor(name);$("measureType").innerHTML=(o.type==="concrete"?["Slab / স্ল্যাব","Beam / বীম","Column / কলাম","Footing / ফুটিং","Stair / সিঁড়ি","Wall / দেয়াল","Custom / অন্যান্য"].map(x=>`<option>${x}</option>`):o.type==="area"?["Area","Length","Perimeter"].map(x=>`<option>${x}</option>`):o.type==="volume"?["Volume","CFT","m³"].map(x=>`<option>${x}</option>`):o.type==="weight"?["Weight","Length","Quantity"].map(x=>`<option>${x}</option>`):o.type==="cost"?["Cost","Quantity","Rate"].map(x=>`<option>${x}</option>`):o.type==="length"?["Length","Height","Distance"].map(x=>`<option>${x}</option>`):["Main measurement","Quantity","Rate"].map(x=>`<option>${x}</option>`)).join("");$("calcUnit").innerHTML=unit==="metric"?`<option value="metric">m / mm / m² / m³ / kg</option><option value="imperial">ft / in / sq ft / CFT / lb</option>`:`<option value="imperial">ft / in / sq ft / CFT / lb</option><option value="metric">m / mm / m² / m³ / kg</option>`;$("calcUnit").value=unit;renderMeasureHint();renderFields(name);$("calcResult").innerHTML="";go("calcPage")}
+function renderMeasureHint(){
+  const v=$("measureType").value;
+  const concrete=/^(Concrete Volume|RCC Mix|Concrete Ingredients)$/.test(current);
+  if(concrete){
+    $("measureHint").textContent=lang==="bn"?`ঢালাইয়ের ধরন: "${v}"। নিচে মাপ ও পরিমাণ দিন। Unit: ${unit==="metric"?"m / mm":"ft / in"}`:`Concrete type: "${v}". Enter dimensions and quantity below. Unit: ${unit==="metric"?"m / mm":"ft / in"}`;
+  }else{
+    $("measureHint").textContent=lang==="bn"?`এই calculator-এ আপনি "${v}" নির্বাচন করেছেন। প্রয়োজনীয় input নিচে দিন। Unit: ${unit==="metric"?"m / mm":"ft / in"}`:`You selected "${v}". Enter the required values below. Unit: ${unit==="metric"?"m / mm":"ft / in"}`;
+  }
+}
+function updateCalcUnit(){
+  unit=$("calcUnit").value;localStorage.scc_unit=unit;
+  renderFields(current);renderMeasureHint(); if(current==='Paint & Tiles')renderFinishFields(); if(current==='Electrical Wire')renderWireFields(); if(current==='RCC Rebar')renderRebarFields(); if(current==='RCC Rebar Quantity')renderRQ(); if(current==='Wood Calculation')renderWoodV12(); syncAllUnitsV11();
+}
+function f(label,id,ph="",type="number"){return `<div class="field"><label>${label}</label><input id="${id}" type="${type}" step="any" placeholder="${ph}"></div>`}
+function pair(a,b){return `<div class="two">${a}${b}</div>`}
+function concreteFields(){
+  const u=unit==="metric";
+  const L=u?"m":"ft", T=u?"mm":"in";
+  const q=f(lang==="bn"?"পরিমাণ (টি)":"Quantity (pcs)","q","1");
+  const type=$("measureType").value;
+  let x="";
+  if(type.startsWith("Slab")) x=pair(f(`Length (${L})`,"l"),f(`Width (${L})`,"w"))+pair(f(`Thickness (${T})`,"d",u?"125":"5"),q);
+  else if(type.startsWith("Beam")) x=pair(f(`Beam length (${L})`,"l"),f(`Width (${T})`,"w",u?"250":"10"))+pair(f(`Depth (${T})`,"d",u?"400":"16"),q);
+  else if(type.startsWith("Column")) x=pair(f(`Column height (${L})`,"l"),f(`Width (${T})`,"w",u?"300":"12"))+pair(f(`Depth (${T})`,"d",u?"300":"12"),q);
+  else if(type.startsWith("Footing")) x=pair(f(`Footing length (${L})`,"l"),f(`Footing width (${L})`,"w"))+pair(f(`Thickness/depth (${T})`,"d"),q);
+  else if(type.startsWith("Stair")) x=pair(f(`Stair length (${L})`,"l"),f(`Stair width (${L})`,"w"))+pair(f(`Waist thickness (${T})`,"d"),q);
+  else if(type.startsWith("Wall")) x=pair(f(`Wall length (${L})`,"l"),f(`Wall height (${L})`,"w"))+pair(f(`Wall thickness (${T})`,"d"),q);
+  else x=pair(f(`Length (${L})`,"l"),f(`Width (${L})`,"w"))+pair(f(`Depth/Thickness (${T})`,"d"),q);
+  x+=`<div class="field"><label>${lang==="bn"?"ঢালাইয়ের Ratio (Cement : Sand : Aggregate)":"Concrete Ratio (Cement : Sand : Aggregate)"}</label>
+  <select id="mixRatio" onchange="applyMixRatio()"><option value="1:1.5:3">1 : 1.5 : 3</option><option value="1:2:4" selected>1 : 2 : 4</option><option value="1:1.5:2">1 : 1.5 : 2</option><option value="1:2:3">1 : 2 : 3</option><option value="custom">Custom / নিজের Ratio</option></select></div>
+  <div class="three" id="ratioParts">${f("Cement part","c","1")}${f("Sand part","s","2")}${f("Aggregate part","a","4")}</div>
+  <div class="three"><div class="field"><label>${lang==="bn"?"সিমেন্ট ৳/ব্যাগ (ঐচ্ছিক)":"Cement ৳/bag (optional)"}</label><input id="pCement" type="number" min="0" placeholder="Optional"></div>
+  <div class="field"><label>${lang==="bn"?"বালু ৳/m³ বা CFT (ঐচ্ছিক)":"Sand ৳/m³ or CFT (optional)"}</label><input id="pSand" type="number" min="0" placeholder="Optional"></div>
+  <div class="field"><label>${lang==="bn"?"খোয়া ৳/m³ বা CFT (ঐচ্ছিক)":"Aggregate ৳/m³ or CFT (optional)"}</label><input id="pAgg" type="number" min="0" placeholder="Optional"></div></div>`;
+  
+
+return x;
+}
+function concreteMixFields(){
+  const ratioLabel=lang==="bn"?"ঢালাইয়ের Ratio নির্বাচন করুন":"Select concrete mix ratio";
+  return pair(
+    f(lang==="bn"?`ঢালাইয়ের আয়তন (${unit==="metric"?"m³":"CFT"})`:`Concrete volume (${unit==="metric"?"m³":"CFT"})`,"v","1"),
+    f(lang==="bn"?"Dry factor":"Dry factor","dry","1.54")
+  )+`<div class="field"><label>${ratioLabel}</label>
+    <select id="mixRatio" onchange="applyMixRatio()">
+      <option value="1:1.5:3">1 : 1.5 : 3</option>
+      <option value="1:2:4">1 : 2 : 4</option>
+      <option value="1:1.5:2">1 : 1.5 : 2</option>
+      <option value="1:2:3">1 : 2 : 3</option>
+      <option value="custom">Custom / নিজের Ratio</option>
+    </select>
+  </div>
+  <div class="three" id="ratioParts">
+    ${f(lang==="bn"?"Cement অংশ":"Cement part","c","1")}
+    ${f(lang==="bn"?"Sand অংশ":"Sand part","s","1.5")}
+    ${f(lang==="bn"?"Aggregate অংশ":"Aggregate part","a","3")}
+  </div>
+  <div class="notice" style="margin-top:8px">${lang==="bn"?"Ratio = Cement : Sand : Aggregate. প্রয়োজন অনুযায়ী Ratio নির্বাচন বা Custom Ratio দিন।":"Ratio = Cement : Sand : Aggregate. Select a preset or enter a custom ratio."}</div>`;
+}
+function applyMixRatio(){
+  const r=$("mixRatio")?.value; if(!r)return;
+  const parts=r.split(":");
+  if(parts.length===3 && r!=="custom"){
+    $("c").value=parts[0]; $("s").value=parts[1]; $("a").value=parts[2];
+  }
+}
+function renderFields(n){
+let u=unit==="metric";
+let x="";
+if(n==="Concrete Volume")x=concreteFields();
+else if(n==="RCC Mix")x=concreteMixFields();
+else if(n==="Concrete Ingredients")x=concreteMixFields();
+else if(n==="Formwork Area")x=pair(f("Length ("+(u?"m":"ft")+")","l"),f("Width/Depth ("+(u?"m":"ft")+")","w"))+f("Quantity","q","1");
+else if(n==="Steel Weight")x=pair(f("Bar diameter (mm)","dia","16"),f(`Total length (${u?"m":"ft"})`,"len","12"))+f("Quantity","q","1");
+else if(n==="Rebar Quantity")x=pair(f("Bar diameter (mm)","dia","16"),f(`Each bar length (${u?"m":"ft"})`,"len","12"))+f("Number of bars","q","1");
+else if(n==="Stirrup Cutting")x=pair(f("Inside width (mm)","w","250"),f("Inside depth (mm)","d","350"))+pair(f("Bar diameter (mm)","dia","8"),f("Hook allowance (mm)","hook","100"))+f("Quantity","q","1");
+else if(n==="Lap Length")x=pair(f("Bar diameter (mm)","dia","16"),f("Lap factor","factor","40"));
+else if(n==="Development Length")x=pair(f("Bar diameter (mm)","dia","16"),f("Development factor","factor","50"));
+else if(n==="Brick Quantity")x=pair(f("Wall length ("+(u?"m":"ft")+")","l"),f("Wall height ("+(u?"m":"ft")+")","h"))+`<div class="field"><label>Wall thickness</label><select id="wallThickness" onchange="syncWallThickness()"><option value="127">5 inch / 127 mm</option><option value="254">10 inch / 254 mm</option><option value="381">15 inch / 381 mm</option><option value="custom">Custom</option></select></div>`+f("Custom thickness (mm)","t","127")+`<div class="optional-note-v11">নিচের অতিরিক্ত তথ্যগুলো ঐচ্ছিক—না দিলেও ইটের মূল হিসাব হবে।</div>`+pair(f("Opening area ("+(u?"m²":"sq ft")+") — optional","open","0"),f("Wastage % — optional","waste","5"))+pair(f("Brick length (mm) — optional","bl","240"),f("Brick width (mm) — optional","bw","115"))+pair(f("Brick height (mm) — optional","bh","70"),f("Joint (mm) — optional","j","10"))+f("Brick rate per 1000 pcs (৳) — optional","pBrick","0")
+else if(n==="Brick Wall Volume")x=pair(f("Wall length ("+(u?"m":"ft")+")","l"),f("Wall height ("+(u?"m":"ft")+")","h"))+`<div class="field"><label>Wall thickness</label><select id="wallThickness" onchange="syncWallThickness()"><option value="127">5 inch / 127 mm</option><option value="254">10 inch / 254 mm</option><option value="381">15 inch / 381 mm</option><option value="custom">Custom</option></select></div>`+f("Thickness (mm)","t","127");
+else if(n==="Mortar Quantity")x=pair(f("Wall volume (m³)","wall"),f("Brick volume (m³)","brick","0.00193"))+f("Brick count (pcs)","q");
+else if(n==="Block Quantity")x=pair(f("Wall length (m)","l"),f("Wall height (m)","h"))+pair(f("Block L (mm)","bl","400"),f("Block H (mm)","bh","200"));
+else if(n==="Wood CFT"||n==="Wood m³"){
+  x=`<div class="field"><label>কাঠের ধরন</label>
+  <select id="woodShape" onchange="renderWoodFields()">
+    <option value="rect">চৌকো / আয়তাকার কাঠ</option>
+    <option value="round">গোল কাঠ / Log</option>
+    <option value="plank">পাটাতন / Plank</option>
+  </select></div><div id="woodDynamicFields"></div>`;
+}
+else if(n==="Wood Cost")x=pair(f(`Wood volume (${u?"m³":"CFT"})`,"v"),f(`Rate / ${u==="metric"?"m³":"CFT"} (৳)`,"r"));
+else if(n==="Excavation")x=pair(f("Length ("+(u?"m":"ft")+")","l"),f("Width ("+(u?"m":"ft")+")","w"))+pair(f("Depth ("+(u?"m":"ft")+")","d"),f("Quantity","q","1"));
+else if(n==="Backfill")x=pair(f(`Excavation volume (${u?"m³":"CFT"})`,"exc"),f(`Foundation volume (${u?"m³":"CFT"})`,"found"));
+else if(n==="Soil Volume Conversion")x=f(`Volume (${u?"m³":"CFT"})`,"v","1");
+else if(n==="Plaster Area")x=pair(f("Length ("+(u?"m":"ft")+")","l"),f("Height ("+(u?"m":"ft")+")","h"))+pair(f("Quantity","q","1"),f(`Opening area (${u?"m²":"sq ft"})`,"open","0"));
+else if(n==="Paint Quantity")x=pair(f(`Wall area (${u?"m²":"sq ft"})`,"a"),f(`Coverage (${u?"m²":"sq ft"}/L)`,"cov","10"))+f("Coats","coats","2");
+else if(n==="Floor Tiles")x=pair(f(`Floor length (${u?"m":"ft"})`,"l"),f(`Floor width (${u?"m":"ft"})`,"w"))+pair(f("Tile L (mm)","tl","600"),f("Tile W (mm)","tw","600"))+f("Wastage %","waste","5");
+else if(n==="Ceiling Area")x=pair(f(`Length (${u?"m":"ft"})`,"l"),f(`Width (${u?"m":"ft"})`,"w"));
+else if(n==="Rectangle Land")x=pair(f("Length ("+(u?"m":"ft")+")","l"),f("Width ("+(u?"m":"ft")+")","w"));
+else if(n==="Triangle Land")x=pair(f("Base ("+(u?"m":"ft")+")","b"),f("Height ("+(u?"m":"ft")+")","h"));
+else if(n==="Trapezoid Land")x=pair(f("Side A ("+(u?"m":"ft")+")","a"),f("Side B ("+(u?"m":"ft")+")","b"))+f("Height ("+(u?"m":"ft")+")","h");
+else if(n==="Irregular Land")x=f("Area pieces in sq ft (comma separated)","a","100,120,95","text");
+else if(n==="Unit/Area Converter")x=pair(f("Value","v","1"),`<div class="field"><label>From / To</label><div class="two"><select id="from"><option>sq ft</option><option>m²</option><option>decimal</option><option>katha</option><option>bigha</option></select><select id="to"><option>decimal</option><option>sq ft</option><option>m²</option><option>katha</option><option>bigha</option></select></div></div>`);
+else if(n==="Material Budget")x=["Rod","Cement","Brick","Sand","Stone Chips","Wood","Labour","Other"].map((z,i)=>pair(f(z+" Qty","q"+i,"0"),f(z+" Rate (৳)","r"+i,"0"))).join("");
+else if(n==="Labour Cost")x=pair(f("Workers","workers","1"),f("Days","days","1"))+f("Daily rate (৳)","rate");
+else if(n==="BOQ Item")x=pair(f("Quantity","q"),f("Rate (৳)","r"));
+else if(n==="Project Budget")x=pair(f("Material cost (৳)","m"),f("Labour cost (৳)","l"))+pair(f("Transport (৳)","t"),f("Other (৳)","o"));
+else if(n==="Building Information")x=`<div class="notice">এই অংশে ভবনের basic data দিন। এটি structural design-এর input summary তৈরি করবে।</div>`+pair(f("Building floors","floors","2"),f("Typical floor height (m)","fh","3"))+pair(f("Building length (m)","l","12"),f("Building width (m)","w","10"))+pair(f("Typical span (m)","span","4"),f("Use","use","Residential","text"))+f("Soil SBC (kPa)","sbc","100");
+else if(n==="Footing Guide")x=pair(f("Building floors","floors","2"),f("Tributary load (kN)","load","300"))+pair(f("Soil SBC (kPa)","sbc","100"),f("Safety/service factor","sf","1.1"))+pair(f("Footing type","type","Isolated","text"),f("Column size (mm)","col","300"));
+else if(n==="Column Guide")x=pair(f("Building floors","floors","2"),f("Axial load (kN)","load","300"))+pair(f("Column width (mm)","w","300"),f("Column depth (mm)","d","300"))+pair(f("Concrete grade f'c (MPa)","fc","25"),f("Steel fy (MPa)","fy","415"));
+else if(n==="Beam Guide")x=pair(f("Span (m)","span","4"),f("Beam width (mm)","w","250"))+pair(f("Beam depth (mm)","d","400"),f("Concrete grade (MPa)","fc","25"))+f("Main bar diameter (mm)","dia","16");
+else if(n==="Slab Guide")x=pair(f("Short span (m)","s","3"),f("Long span (m)","l","4"))+pair(f("Live load (kN/m²)","live","2"),f("Concrete grade (MPa)","fc","25"))+f("Slab type","type","Two-way","text");
+else if(n==="Staircase")x=pair(f("Floor height (m)","h","3"),f("Stair width (m)","w","1.2"))+pair(f("Riser (mm)","r","160"),f("Tread (mm)","t","280"));
+else if(n==="Load Calculator")x=pair(f("Slab area (m²)","area","20"),f("Dead load (kN/m²)","dead","4"))+pair(f("Live load (kN/m²)","live","2"),f("Wall load (kN)","wall","30"))+f("Number of floors","floors","2");
+else if(n==="Earthquake/Wind Guide")x=pair(f("Building floors","floors","2"),f("Seismic zone / Z","z","0.12"))+pair(f("Importance factor","i","1"),f("Basic wind speed (m/s)","wind","40"));
+else if(n==="Structural Rebar Guide")x=pair(f("Member","member","Beam","text"),f("Main bar dia (mm)","dia","16"))+pair(f("Bars","bars","4"),f("Member length (m)","len","4"))+pair(f("Stirrup dia (mm)","st","8"),f("Spacing (mm)","sp","150"));
+else if(n==="Structural BOQ")x=pair(f("Concrete (m³)","concrete"),f("Steel (kg)","steel"))+pair(f("Cement (bags)","cement"),f("Bricks (pcs)","brick"))+pair(f("Sand (m³)","sand"),f("Stone (m³)","stone"));
+else if(n==="Unit Converter")x=pair(f("Value","v","1"),`<div class="field"><label>From / To</label><div class="two"><select id="from"><option>m</option><option>ft</option><option>mm</option><option>in</option><option>m²</option><option>sq ft</option><option>m³</option><option>CFT</option><option>kg</option><option>ton</option></select><select id="to"><option>ft</option><option>m</option><option>mm</option><option>in</option><option>m²</option><option>sq ft</option><option>m³</option><option>CFT</option><option>kg</option><option>ton</option></select></div></div>`);
+else if(n==="Percentage")x=pair(f("Value","v"),f("Percentage %","p"));
+else if(n==="Ratio")x=pair(f("A","a"),f("B","b"));
+else if(n==="Slope/Gradient")x=pair(f("Rise","r"),f("Run","run"));
+else if(n==="Number of Materials")x=pair(f("Total quantity","q"),f("Unit wastage %","w","5"));
+if(n==="Paint & Tiles")x=`<div class="field"><label>কাজ নির্বাচন</label><select id="finishType" onchange="renderFinishFields()"><option value="paint">রং / Paint</option><option value="tile">Floor Tiles</option><option value="walltile">Wall Tiles</option></select></div><div id="finishFields"></div>`;
+else if(n==="Electrical Wire")x=`<div class="field"><label>হিসাবের ভিত্তি</label><select id="wireBasis" onchange="renderWireFields()"><option value="sqft">Square Feet</option><option value="floor">তলা অনুযায়ী</option></select></div><div id="wireFields"></div>`;
+else if(n==="Building Cost")x=`<div class="field"><label>মোট Built-up Area (sq ft)</label><input id="bcArea" type="number"></div><div class="field"><label>তলা সংখ্যা</label><input id="bcFloors" type="number" value="1"></div><div class="field"><label>কাজের পরিধি</label><select id="bcScope"><option value="all">স্ট্রাকচারাল + গাথুনি + ফিনিশিং</option><option value="structure">স্ট্রাকচারাল</option><option value="masonry">গাথুনি</option><option value="finish">ফিনিশিং</option></select></div><div class="field"><label>লেবার</label><select id="bcLabor"><option value="yes">লেবারসহ</option><option value="no">লেবার বাদে</option></select></div><div class="two"><div class="field"><label>লেবারসহ Rate ৳/sqft</label><input id="bcRateLabor" type="number"></div><div class="field"><label>লেবার বাদে Rate ৳/sqft</label><input id="bcRateNoLabor" type="number"></div></div>`;
+else if(n==="RCC Rebar")x=`<div class="field"><label>Member নির্বাচন</label><select id="rebarMember" onchange="renderRebarFields()"><option value="beam">Beam / বীম</option><option value="footing">Footing / ফুটিং</option><option value="column">Column / কলাম</option><option value="slab">Slab / ছাদ</option><option value="stair">Stair / সিঁড়ি</option><option value="tie">Tie Beam</option></select></div><div id="rebarFields"></div>`;
+else if(n==="RCC Rebar Quantity")x=`<div class="field"><label>Member / অংশ নির্বাচন</label><select id="rqMember" onchange="renderRQ()"><option value="slab">ছাদ / Slab</option><option value="beam">বীম / Beam</option><option value="column">কলাম / Column</option><option value="footing">ফুটিং / Footing</option><option value="stair">সিঁড়ি / Stair</option><option value="tie">টাই বীম / Tie Beam</option></select></div><div id="rqFields"></div>`;
+if(n!=="Concrete Volume" && n!=="RCC Mix" && n!=="Concrete Ingredients"){
+  x+=`<div class="field" style="margin-top:12px"><label>${lang==="bn"?"মালামাল/ফলাফলের Unit প্রতি দাম (ঐচ্ছিক)":"Material/result price per output unit (optional)"}</label><input id="resultRate" type="number" min="0" placeholder="${lang==="bn"?"দাম না জানলে খালি রাখুন":"Leave blank if unknown"}"></div>`;
+}
+x+=`<div class="price-panel" style="margin-top:12px;padding:12px;border:1px dashed #b8c2cc;border-radius:10px">
+<strong>💰 মালামালের দাম (ঐচ্ছিক)</strong>
+<div class="two">${f("মালামাল / Material","material","Cement / Sand / Brick / Rod")}${f("দাম / Rate (৳)","materialRate","ফাঁকা রাখলে শুধু quantity")}</div>
+<div class="small">দাম না দিলেও হিসাব হবে। যেখানে প্রযোজ্য, ফলাফলে quantity × rate অনুযায়ী আনুমানিক খরচ দেখানো হবে।</div>
+</div>`;
+$("calcFields").innerHTML=x;if((n==="RCC Mix"||n==="Concrete Ingredients"||n==="Concrete Volume")&&$("mixRatio"))applyMixRatio()}
+function num(id){return parseFloat($(id)?.value)||0}
+function Lm(){return unit==="metric"?1:.3048}
+function lengthM(id){return num(id)*Lm()}
+
+function addHomeDeleteControlsV14(n){
+ const box=document.getElementById("calcFields");
+ if(!box || box.dataset.v14==="1") return;
+ box.dataset.v14="1";
+ const bar=document.createElement("div");
+ bar.className="v14-actions";
+ bar.innerHTML=`<button type="button" class="v14-home" onclick="moveCurrentToHomeV14()">⌂ হোমে নিন</button>
+ <button type="button" class="v14-delete" onclick="deleteCurrentCalculatorV14()">🗑 ডিলিট</button>`;
+ box.insertBefore(bar,box.firstChild);
+}
+function moveCurrentToHomeV14(){
+ const name=window.current;
+ if(!name)return;
+ let homes=JSON.parse(localStorage.getItem("sazzadHomeCalculatorsV14")||"[]");
+ if(!homes.includes(name)) homes.push(name);
+ localStorage.setItem("sazzadHomeCalculatorsV14",JSON.stringify(homes));
+ renderHomeShortcutsV14();
+ alert("এই ক্যালকুলেটরটি হোমে যোগ হয়েছে।");
+}
+function deleteCurrentCalculatorV14(){
+ const name=window.current;
+ if(!name)return;
+ if(!confirm("এই ক্যালকুলেটরটি হোম/অ্যাপের তালিকা থেকে মুছে ফেলবেন?"))return;
+ let hidden=JSON.parse(localStorage.getItem("sazzadHiddenCalculatorsV14")||"[]");
+ if(!hidden.includes(name)) hidden.push(name);
+ localStorage.setItem("sazzadHiddenCalculatorsV14",JSON.stringify(hidden));
+ renderHomeShortcutsV14();
+ if(typeof goHome==="function")goHome(); else if(typeof home==="function")home();
+}
+function restoreDeletedCalculatorsV14(){
+ localStorage.removeItem("sazzadHiddenCalculatorsV14");
+ renderHomeShortcutsV14();
+ alert("ডিলিট করা ক্যালকুলেটরগুলো আবার দেখা যাবে।");
+}
+function isHiddenV14(n){
+ return new Set(JSON.parse(localStorage.getItem("sazzadHiddenCalculatorsV14")||"[]")).has(n);
+}
+function renderHomeShortcutsV14(){
+ const h=document.getElementById("v14HomeShortcuts"); if(!h)return;
+ const homes=JSON.parse(localStorage.getItem("sazzadHomeCalculatorsV14")||"[]");
+ const hidden=new Set(JSON.parse(localStorage.getItem("sazzadHiddenCalculatorsV14")||"[]"));
+ const names=homes.filter(x=>!hidden.has(x));
+ h.innerHTML=names.length?`<div class="v14-title">⭐ আমার হোম ক্যালকুলেটর</div>`+names.map(x=>`<button type="button" onclick="openV14Calculator(${JSON.stringify(x)})">${x}</button>`).join(""):`<div class="small">হোমে নেওয়া calculator এখানে দেখাবে।</div>`;
+}
+function openV14Calculator(n){
+ if(typeof show==="function"){show(n);return;}
+ if(typeof openCalculator==="function"){openCalculator(n);return;}
+}
+
+function show(v,u,formula,extra=""){if(!Number.isFinite(v)){$("calcResult").innerHTML=`<div class="result">${T[lang].valid}</div>`;return}let text=`<div class="result"><div class="big">${fmt(v)} ${u}</div><div class="formula"><b>Formula:</b> ${formula}</div>${extra}<div class="actions"><button onclick="saveResult()">${T[lang].save}</button><button onclick="window.print()">${T[lang].print}</button><button onclick="window.print()">${T[lang].pdf}</button><button onclick="copyResult()">${T[lang].copy}</button></div></div>`;$("calcResult").innerHTML=text}
+function fmt(v){return Number(v).toLocaleString(lang==="bn"?"bn-BD":"en-US",{maximumFractionDigits:3})}
+
+function renderWoodFields(){
+ const metric=unit==="metric", L=metric?"m":"ft", small=metric?"cm":"in";
+ const box=$("woodDynamicFields"); if(!box)return;
+ const shape=$("woodShape").value;
+ if(shape==="round"){
+   box.innerHTML=pair(f(`দৈর্ঘ্য (${L})`,"l"),f(`ব্যাস (${small})`,"w"))+f("পরিমাণ / Quantity","q","1");
+ }else{
+   box.innerHTML=pair(f(`দৈর্ঘ্য (${L})`,"l"),f(`প্রস্থ (${small})`,"w"))+pair(f(`পুরুত্ব (${small})`,"d"),f("পরিমাণ / Quantity","q","1"));
+ }
+}
+function refreshUnitTextV12(){
+ const metric=unit==="metric";
+ document.querySelectorAll("[data-v12-unit]").forEach(el=>el.textContent=metric?el.dataset.metric:el.dataset.imperial);
+ document.querySelectorAll(".field label").forEach(l=>{
+   if(l.dataset.v12Metric && l.dataset.v12Imperial) l.textContent=metric?l.dataset.v12Metric:l.dataset.v12Imperial;
+ });
+}
+function syncAllUnitsV11(){
+ const u=unit==="metric"?"m":"ft";
+ document.querySelectorAll("[data-unit-label]").forEach(el=>el.textContent=el.dataset.unitLabel.replace("{u}",u));
+ document.querySelectorAll("[data-unit-placeholder]").forEach(el=>el.placeholder=el.dataset.unitPlaceholder.replace("{u}",u));
+ const ids=["l","w","h"];
+ ids.forEach(id=>{const el=$(id); if(el&&el.dataset.baseLabel){const lab=el.closest(".field")?.querySelector("label");if(lab)lab.textContent=el.dataset.baseLabel.replace("{u}",u);}});
+}
+function syncWallThickness(){
+  const s=$("wallThickness"),t=$("t"); if(!s||!t)return;
+  if(s.value==="custom"){t.disabled=false; t.value="";}else{t.disabled=true;t.value=s.value;}
+}
+function renderLandFields(){
+  const box=$("landDynamicFields"), u=unit==="metric", L=u?"m":"ft";
+  if(!box)return; const s=$("landShape").value;
+  if(s==="rect")box.innerHTML=pair(f(`দৈর্ঘ্য (${L})`,"l"),f(`প্রস্থ (${L})`,"w"));
+  else if(s==="square")box.innerHTML=f(`এক পাশ (${L})`,"l");
+  else if(s==="tri")box.innerHTML=pair(f(`ভূমি (${L})`,"b"),f(`উচ্চতা (${L})`,"h"));
+  else if(s==="trap")box.innerHTML=pair(f(`প্রথম ভূমি (${L})`,"a"),f(`দ্বিতীয় ভূমি (${L})`,"b"))+f(`উচ্চতা (${L})`,"h");
+  else if(s==="circle")box.innerHTML=f(`ব্যাসার্ধ (${L})`,"r");
+  else box.innerHTML=f("Area pieces (comma separated, "+(u?"m²":"sq ft")+")","a","100,50,25");
+}
+
+
+function renderFinishFields(){
+ const b=$("finishFields"),u=unit==="metric"?"m":"ft";if(!b)return;
+ if($("finishType").value==="paint")b.innerHTML=pair(f("Length ("+u+")","l"),f("Height ("+u+")","h"))+f("Surface count","q","4")+pair(f("Coverage (m²/L or sqft/L)","coverage"),f("Coats","coats","2"));
+ else b.innerHTML=pair(f("Length ("+u+")","l"),f("Width ("+u+")","w"))+pair(f("Tile length (cm)","tileL","60"),f("Tile width (cm)","tileW","60"))+f("Wastage %","waste","5");
+}
+function renderWireFields(){
+ const b=$("wireFields");if(!b)return;
+ if($("wireBasis").value==="sqft")b.innerHTML=f("Total building area (sq ft)","area");
+ else b.innerHTML=pair(f("Floor count","floors","1"),f("Area per floor (sq ft)","floorArea"));
+ b.innerHTML+=pair(f("Wire ft/sqft (estimate)","rate","1.5"),f("Power share %","power","35"))+pair(f("Light/Fan share %","light","30"),f("Socket share %","socket","20"))+
+ `<div class="notice">এটি preliminary estimate; final circuit layout ও wire size electrician/engineer দ্বারা নির্ধারণ করুন।</div>`;
+}
+function renderRebarFields(){
+ const b=$("rebarFields");if(!b)return;let t=$("rebarMember").value;
+ if(t==="beam"||t==="tie")b.innerHTML=pair(f("Beam count","q","1"),f("Length (ft)","l","15"))+pair(f("Top bars","top","3"),f("Bottom bars","bot","3"))+pair(f("Main dia (mm)","dia","16"),f("Stirrup dia (mm)","tieDia","8"))+f("Stirrup spacing (mm)","spacing","150");
+ else if(t==="column")b.innerHTML=pair(f("Column count","q","1"),f("Height (ft)","h","10"))+pair(f("Main bars","bars","8"),f("Main dia (mm)","dia","16"))+pair(f("Column width (in)","a","12"),f("Depth (in)","b","12"))+pair(f("Tie dia (mm)","tieDia","8"),f("Tie spacing (mm)","spacing","150"));
+ else if(t==="footing")b.innerHTML=pair(f("Footing count","q","1"),f("Length (ft)","l","6"))+pair(f("Width (ft)","w","6"),f("Main dia (mm)","dia","12"))+f("Spacing (mm)","spacing","150");
+ else if(t==="slab")b.innerHTML=pair(f("Area (sq ft)","area","1000"),f("Main dia (mm)","dia","10"))+pair(f("Main spacing (mm)","spacing","150"),f("Distribution dia (mm)","dia2","8"))+f("Distribution spacing (mm)","spacing2","200");
+ else b.innerHTML=pair(f("Stair length (ft)","l","15"),f("Width (ft)","w","4"))+f("Main dia (mm)","dia","12")+f("Spacing (mm)","spacing","150");
+}
+
+function renderRQ(){
+ const b=$("rqFields");if(!b)return;const t=$("rqMember").value;
+ if(t==="slab")b.innerHTML=pair(f("Slab area (sq ft)","area","1000"),f("Thickness (in)","d","5"))+pair(f("Main bar dia (mm)","dia","10"),f("Main spacing (mm)","spacing","150"))+pair(f("Distribution dia (mm)","dia2","8"),f("Distribution spacing (mm)","spacing2","200"));
+ else if(t==="beam"||t==="tie")b.innerHTML=pair(f("Beam count","q","1"),f("Length (ft)","l","15"))+pair(f("Top bars","top","3"),f("Bottom bars","bot","3"))+pair(f("Main dia (mm)","dia","16"),f("Stirrup dia (mm)","tieDia","8"))+f("Stirrup spacing (mm)","spacing","150");
+ else if(t==="column")b.innerHTML=pair(f("Column count","q","1"),f("Height (ft)","h","10"))+pair(f("Main bars/column","bars","8"),f("Main dia (mm)","dia","16"))+pair(f("Column width (in)","a","12"),f("Depth (in)","b","12"))+pair(f("Tie dia (mm)","tieDia","8"),f("Tie spacing (mm)","spacing","150"));
+ else if(t==="footing")b.innerHTML=pair(f("Footing count","q","1"),f("Length (ft)","l","6"))+pair(f("Width (ft)","w","6"),f("Main dia (mm)","dia","12"))+f("Spacing (mm)","spacing","150");
+ else b.innerHTML=pair(f("Stair length (ft)","l","15"),f("Width (ft)","w","4"))+pair(f("Main dia (mm)","dia","12"),f("Spacing (mm)","spacing","150"));
+}
+function calcRQ(){
+ const t=$("rqMember").value,wt=d=>d*d/162.2;let kg=0;
+ if(t==="slab"){let a=num("area")||1000;kg=a*.09290304*(1000/(num("spacing")||150))*2*wt(num("dia")||10)+a*.09290304*(1000/(num("spacing2")||200))*2*wt(num("dia2")||8);}
+ else if(t==="beam"||t==="tie"){let q=num("q")||1,L=num("l")||15,main=(num("top")||3)+(num("bot")||3);kg=q*L*.3048*main*wt(num("dia")||16);kg+=q*(L*1000/(num("spacing")||150))*2*((num("a")||10)+(num("b")||18))*.0254*wt(num("tieDia")||8);}
+ else if(t==="column"){let q=num("q")||1,h=num("h")||10,bars=num("bars")||8;kg=q*h*.3048*bars*wt(num("dia")||16);}
+ else if(t==="footing"){let q=num("q")||1,a=(num("l")||6)*(num("w")||6);kg=q*a*.09290304*(1000/(num("spacing")||150))*2*wt(num("dia")||12);}
+ else {let a=(num("l")||15)*(num("w")||4);kg=a*.09290304*(1000/(num("spacing")||150))*2*wt(num("dia")||12);}
+ show(kg,"kg","Preliminary total rebar quantity",`<br>≈ <b>${fmt(kg/1000,3)} ton</b><br><span class="small">Final reinforcement must follow structural drawings/BNBC and engineer approval.</span>`);
+}
+
+function calcV9Extra(n){
+ let v=0,u="",fm="",e="";
+ if(n==="Paint & Tiles"){
+  const type=$("finishType")?.value||"paint";
+  if(type==="paint"){
+   const area=lengthM("l")*lengthM("h")*(num("q")||1), coats=num("coats")||1;
+   v=area*coats; u="m²-coat"; fm="Surface area × coats";
+   if(num("coverage")) e=`<br>প্রয়োজনীয় paint: <b>${fmt(v/num("coverage"),2)} L</b>`;
+  }else{
+   const area=lengthM("l")*lengthM("w"), tile=(num("tileL")/100)*(num("tileW")/100);
+   if(tile<=0){show(NaN,"","Invalid tile size");return true;}
+   v=Math.ceil(area/tile*(1+(num("waste")||0)/100)); u="pcs"; fm="Floor area ÷ tile area + wastage";
+   e=`<br>মোট area: <b>${fmt(unit==="metric"?area:area*10.7639104,2)} ${unit==="metric"?"m²":"sq ft"}</b>`;
+  }
+ } else if(n==="Electrical Wire"){
+  const basis=$("wireBasis")?.value||"sqft";
+  const area=basis==="sqft"?num("area"):num("floors")*num("floorArea");
+  const ft=area*(num("rate")||1.5);
+  v=unit==="metric"?ft*.3048:ft; u=unit==="metric"?"m":"ft"; fm="Building area × wire rate";
+  e=`<br>Power ≈ ${fmt(ft*(num("power")||0)/100,1)} ft, Light/Fan ≈ ${fmt(ft*(num("light")||0)/100,1)} ft, Socket ≈ ${fmt(ft*(num("socket")||0)/100,1)} ft`;
+ } else if(n==="Building Cost"){
+  const area=num("bcArea"), floors=Math.max(1,num("bcFloors")||1);
+  const total=area*floors, labor=$("bcLabor")?.value==="yes";
+  let r=labor?num("bcRateLabor"):num("bcRateNoLabor");
+  if(!r){const scope=$("bcScope")?.value;r=scope==="structure"?1800:scope==="masonry"?700:scope==="finish"?1400:(labor?4000:3200);}
+  v=total*r;u="৳";fm="Built-up area × rate";
+  e=`<br>Rate: <b>৳ ${fmt(r)}/sqft</b><br>Total built-up area: <b>${fmt(total)} sq ft</b><br><span class="small">প্রাথমিক estimate; স্থানীয় BOQ/বাজারদর দিয়ে যাচাই করুন।</span>`;
+ }
+ if(u){show(v,u,fm,e);return true}
+ return false;
+}
+
+function renderWoodV12(){
+ const b=$("woodFields");if(!b)return;
+ const t=$("woodType").value;
+ if(t==="rect") b.innerHTML=pair(f("দৈর্ঘ্য ("+(unit==="metric"?"m":"ft")+")","l"),f("প্রস্থ (inch)","w","6"))+f("পুরুত্ব (inch)","th","3")+f("পরিমাণ (টি)","q","1");
+ else if(t==="round") b.innerHTML=pair(f("দৈর্ঘ্য ("+(unit==="metric"?"m":"ft")+")","l"),f("ব্যাস (inch)","dia","8"))+f("পরিমাণ (টি)","q","1");
+ else b.innerHTML=pair(f("দৈর্ঘ্য ("+(unit==="metric"?"m":"ft")+")","l"),f("প্রস্থ (inch)","w","6"))+f("পুরুত্ব (inch)","th","1")+f("পরিমাণ (টি)","q","1");
+}
+function calcWoodV12(){
+ const t=$("woodType").value,q=num("q")||1,L=unit==="metric"?(num("l")||0):(num("l")||0)*.3048;
+ let cft=0;
+ if(t==="round"){let d=(num("dia")||0)*.0254;cft=Math.PI*(d*d/4)*L*q*35.3147;}
+ else {let w=(num("w")||0)*.0254,th=(num("th")||0)*.0254;cft=L*w*th*q*35.3147;}
+ const cum=cft*.0283168466;
+ show(cft,"CFT","কাঠের মোট আয়তন",`<br>${fmt(cum,3)} m³<br><span class="small">কাঠের ধরন অনুযায়ী প্রয়োজনীয় field-ই দেখানো হয়েছে।</span>`);
+}
+
+function calculateCurrent(){
+ if(current==="Wood Calculation"){calcWoodV12();return;}
+ if(current==="RCC Rebar Quantity"){calcRQ();return;}
+ if(calcV9Extra(current))return;
+let n=current,v,u,f,e="";
+if(n==="Concrete Volume"){
+  const factor=unit==="metric"?1:0.3048;
+  const l=num("l")*factor,w=num("w")*factor;
+  const d=unit==="metric"?num("d")/1000:num("d")*0.0254;
+  const m3=l*w*d*(num("q")||1);
+  const [rc,rs,ra]=[$("c"),$("s"),$("a")].map(x=>num(x.id)); const p=rc+rs+ra;
+  let ing="";
+  if(p>0){
+    const dry=m3*1.54, cement=dry*rc/p*1440/50, sand=dry*rs/p, agg=dry*ra/p;
+    const pc=num("pCement"), ps=num("pSand"), pa=num("pAgg");
+    const sandUnit=unit==="metric"?sand:sand*35.314667, aggUnit=unit==="metric"?agg:agg*35.314667;
+    let cost=0, has=false;
+    if(pc>0){cost+=cement*pc;has=true} if(ps>0){cost+=sandUnit*ps;has=true} if(pa>0){cost+=aggUnit*pa;has=true}
+    ing=`<br><b>Ratio:</b> ${fmt(rc)} : ${fmt(rs)} : ${fmt(ra)}<br>Cement: <b>${fmt(cement)} bags</b><br>Sand: <b>${fmt(sandUnit)} ${unit==="metric"?"m³":"CFT"}</b><br>Aggregate: <b>${fmt(aggUnit)} ${unit==="metric"?"m³":"CFT"}</b>${has?`<br><b>Known material cost: ৳ ${fmt(cost)}</b>`:"<br><span class='formula'>দাম না দিলেও পরিমাণের হিসাব হবে।</span>"}`;
+  }
+  v=unit==="metric"?m3:m3*35.314667;u=unit==="metric"?"m³":"CFT";f="Length × Width × Thickness × Quantity";
+  const type=$("measureType").value; const L=num("l"),W=num("w"),D=num("d");
+  e=`<div><b>${type}</b><br>Length: ${fmt(L)} ${unit==="metric"?"m":"ft"}<br>Width: ${fmt(W)} ${unit==="metric"?"m":"ft"}<br>Thickness/Depth: ${fmt(D)} ${unit==="metric"?"mm":"in"}${ing}</div>`;
+}
+else if(n==="RCC Mix"){
+  let wet=unit==="metric"?num("v"):num("v")*0.0283168466;
+  let dry=wet*num("dry"),p=num("c")+num("s")+num("a");
+  if(p<=0){show(NaN,"","Invalid mix ratio");return}
+  let cement=dry*num("c")/p*1440/50,sand=dry*num("s")/p,agg=dry*num("a")/p;
+  v=cement;u="bags cement";f="Wet concrete × dry factor × cement proportion";
+  const sandOut=unit==="metric"?sand:sand*35.314667, aggOut=unit==="metric"?agg:agg*35.314667, volOut=unit==="metric"?wet:wet*35.314667;
+  e=`<div><b>${$("measureType").value}</b><br>Wet concrete: <b>${fmt(volOut)} ${unit==="metric"?"m³":"CFT"}</b><br>Sand: <b>${fmt(sandOut)} ${unit==="metric"?"m³":"CFT"}</b><br>Aggregate: <b>${fmt(aggOut)} ${unit==="metric"?"m³":"CFT"}</b><br>Dry volume: <b>${fmt(unit==="metric"?dry:dry*35.314667)} ${unit==="metric"?"m³":"CFT"}</b></div>`;
+}
+else if(n==="Concrete Ingredients"){
+  let wet=unit==="metric"?num("v"):num("v")*0.0283168466;
+  let dry=wet*num("dry"),p=num("c")+num("s")+num("a");
+  if(p<=0){show(NaN,"","Invalid mix ratio");return}
+  let cement=dry*num("c")/p*1440/50,sand=dry*num("s")/p,agg=dry*num("a")/p;
+  v=cement;u="bags cement";f="Wet volume × dry factor × cement proportion";
+  const sandOut=unit==="metric"?sand:sand*35.314667, aggOut=unit==="metric"?agg:agg*35.314667, volOut=unit==="metric"?wet:wet*35.314667;
+  e=`<div><b>${$("measureType").value}</b><br>Cement: <b>${fmt(cement)} bags</b><br>Wet concrete: <b>${fmt(volOut)} ${unit==="metric"?"m³":"CFT"}</b><br>Sand: <b>${fmt(sandOut)} ${unit==="metric"?"m³":"CFT"}</b><br>Aggregate: <b>${fmt(aggOut)} ${unit==="metric"?"m³":"CFT"}</b><br>Dry volume: <b>${fmt(unit==="metric"?dry:dry*35.314667)} ${unit==="metric"?"m³":"CFT"}</b></div>`;
+}
+else if(n==="Formwork Area"){v=lengthM("l")*lengthM("w")*(num("q")||1);u="m²";f="L × W × quantity"}
+else if(n==="Steel Weight"){let lm=lengthM("len");v=num("dia")**2/162.2*lm*(num("q")||1);u="kg";f="d² ÷ 162.2 × length(m) × quantity"}
+else if(n==="Rebar Quantity"){let lm=lengthM("len");v=num("dia")**2/162.2*lm*num("q");u="kg";f="d² ÷ 162.2 × length(m) × bars"}
+else if(n==="Stirrup Cutting"){v=2*(num("w")+num("d"))+2*num("hook")-4*num("dia");v*=num("q")||1;u="mm";f="2(W+D)+2Hook−4d × quantity"}
+else if(n==="Lap Length"){v=num("dia")*num("factor");u="mm";f="Bar diameter × lap factor";e='<div class="warn">Lap length must be verified from the structural drawing/code requirements.</div>'}
+else if(n==="Development Length"){v=num("dia")*num("factor");u="mm";f="Bar diameter × development factor";e='<div class="warn">Development length depends on concrete/steel grade, bond, bar position and code provisions.</div>'}
+else if(n==="Brick Quantity"){
+ const wall=lengthM("l")*lengthM("h")*(num("t")/1000);
+ const brickL=(num("bl")||240)/1000, brickW=(num("bw")||115)/1000, brickH=(num("bh")||70)/1000, joint=(num("j")||10)/1000;
+ const module=(brickL+joint)*(brickW+joint)*(brickH+joint);
+ const opening=unit==="metric"?num("open"):num("open")*.09290304;
+ const net=Math.max(0,wall-opening);
+ v=Math.ceil(net/module*(1+(num("waste")||0)/100));u="pcs";f="Net wall volume ÷ brick module volume × wastage";
+ const pc=num("pBrick"); if(pc>0)e+=`<br>ইটের খরচ: <b>৳ ${fmt(v/1000*pc)}</b>`;
+ e+=`<br>প্রয়োজনীয় ইট: <b>${fmt(v)} পিস</b>`;
+}
+else if(n==="Brick Wall Volume"){v=lengthM("l")*lengthM("h")*num("t")/1000;u="m³";f="L × H × T"}
+else if(n==="Mortar Quantity"){v=Math.max(0,num("wall")-num("brick")*num("q"));u="m³";f="Wall volume − brick volume"}
+else if(n==="Block Quantity"){v=Math.ceil(lengthM("l")*lengthM("h")/((num("bl")/1000)*(num("bh")/1000)));u="pcs";f="Wall area ÷ block face area"}
+else if(n==="Wood CFT"||n==="Wood m³"){
+ let L=lengthM("l"), q=num("q")||1, shape=$("woodShape")?.value||"rect";
+ let cft=0;
+ if(shape==="round"){
+   let d=(unit==="metric"?num("w")/100:num("w")*.0254);
+   cft=Math.PI*(d*d/4)*L*q*35.314667;
+ }else{
+   let w=(unit==="metric"?num("w")/100:num("w")*.0254);
+   let d=(unit==="metric"?num("d")/100:num("d")*.0254);
+   cft=L*w*d*q*35.314667;
+ }
+ v=unit==="metric"?cft*.0283168466:cft;u=unit==="metric"?"m³":"CFT";f="Selected wood shape volume";
+ let p=num("pWood"); if(p>0)e+=`<br>কাঠের খরচ: <b>৳ ${fmt(cft*p)}</b>`;
+}
+else if(n==="Wood Cost"){v=num("v")*num("r");u="৳";f="CFT × rate"}
+else if(n==="Excavation"){v=lengthM("l")*lengthM("w")*lengthM("d")*(num("q")||1);u="m³";f="L × W × D × quantity"}
+else if(n==="Backfill"){v=Math.max(0,num("exc")-num("found"));u="m³";f="Excavation − foundation volume"}
+else if(n==="Soil Volume Conversion"){v=num("v")*35.314667;u="CFT";f="m³ × 35.314667"}
+else if(n==="Plaster Area"){v=Math.max(0,lengthM("l")*lengthM("h")*(num("q")||1)-num("open"));u="m²";f="L × H × quantity − openings"}
+else if(n==="Paint Quantity"){
+ let area=unit==="metric"?num("a"):num("a")*.09290304, cov=unit==="metric"?num("cov"):num("cov")*.09290304;
+ v=area*(num("coats")||1)/(cov||1);u="L";f="Area × coats ÷ coverage";
+}
+else if(n==="Floor Tiles"){
+ let area=lengthM("l")*lengthM("w"),tile=num("tl")/1000*num("tw")/1000;
+ v=Math.ceil(area/tile*(1+(num("waste")||0)/100));u="pcs";f="Floor area ÷ tile area × wastage";
+ e=`<br>Tile area: <b>${fmt(tile*10000)} cm²</b><br>Floor area: <b>${fmt(unit==="metric"?area:area*10.7639104,2)} ${unit==="metric"?"m²":"sq ft"}</b>`;
+}
+else if(n==="Ceiling Area"){
+ let area=lengthM("l")*lengthM("w");v=unit==="metric"?area:area*10.7639104;u=unit==="metric"?"m²":"sq ft";f="L × W";
+}
+else if(/^(Rectangle Land|Triangle Land|Trapezoid Land|Irregular Land)$/.test(n)){
+ let sh=$("landShape")?.value||"rect",m2=0;
+ if(sh==="rect")m2=lengthM("l")*lengthM("w");
+ else if(sh==="square")m2=Math.pow(lengthM("l"),2);
+ else if(sh==="tri")m2=.5*lengthM("b")*lengthM("h");
+ else if(sh==="trap")m2=(lengthM("a")+lengthM("b"))/2*lengthM("h");
+ else if(sh==="circle")m2=Math.PI*Math.pow(lengthM("r"),2);
+ else {let arr=($("a")?.value||"").split(",").map(Number).filter(Boolean);m2=unit==="metric"?arr.reduce((a,b)=>a+b,0):arr.reduce((a,b)=>a+b,0)*0.09290304;}
+ v=unit==="metric"?m2:m2*10.7639104;u=unit==="metric"?"m²":"sq ft";f="Selected land shape area";e=landExtra(unit==="metric"?m2:m2*10.7639104);
+}
+else if(n==="Unit/Area Converter"){let x=num("v"),from=$("from").value,to=$("to").value,base={ "sq ft":x*0.09290304,"m²":x,"decimal":x*40.468564224,"katha":x*66.890654,"bigha":x*1337.8125}[from];let out={"sq ft":base/0.09290304,"m²":base,"decimal":base/40.468564224,"katha":base/66.890654,"bigha":base/1337.8125}[to];v=out;u=to;f="Convert through m² base"}
+else if(n==="Material Budget"){v=0;for(let i=0;i<8;i++)v+=num("q"+i)*num("r"+i);u="৳";f="Σ(quantity × rate)"}
+else if(n==="Labour Cost"){v=num("workers")*num("days")*num("rate");u="৳";f="Workers × days × daily rate"}
+else if(n==="BOQ Item"){v=num("q")*num("r");u="৳";f="Quantity × rate"}
+else if(n==="Project Budget"){v=num("m")+num("l")+num("t")+num("o");u="৳";f="Material + labour + transport + other"}
+else if(n==="Building Information"){v=num("floors");u="floor(s)";f="Building information summary";e=`<div>Height: ${fmt(num("floors")*num("fh"))} m<br>Plan: ${fmt(num("l"))} × ${fmt(num("w"))} m<br>Typical span: ${fmt(num("span"))} m<br>SBC: ${fmt(num("sbc"))} kPa</div>`}
+else if(n==="Footing Guide"){let area=num("load")*num("sf")/num("sbc");v=Math.sqrt(area);u="m × m preliminary square";f="√(Service load × factor ÷ SBC)";e='<div class="warn">Preliminary sizing only. Final footing dimensions, thickness, punching/shear, bending and reinforcement require soil report + structural design.</div>'}
+else if(n==="Column Guide"){let area=num("load")*1000/(0.35*num("fc"));let side=Math.sqrt(area);v=Math.max(side,num("w"),num("d"));u="mm preliminary minimum side";f="Axial load ÷ assumed design stress (simplified)";e='<div class="warn">Not a final column design. Slenderness, moments, interaction, ties, seismic detailing and BNBC checks are required.</div>'}
+else if(n==="Beam Guide"){v=Math.max(num("d"),num("span")*1000/12);u="mm preliminary depth";f="Span/12 rule-of-thumb check";e=`<div>Width input: ${fmt(num("w"))} mm<br>Main bar input: ${fmt(num("dia"))} mm</div><div class="warn">Final beam size/rebar must be designed for bending, shear, deflection, development and seismic detailing.</div>`}
+else if(n==="Slab Guide"){v=Math.max(100,num("s")*1000/30);u="mm preliminary thickness";f="Short span/30 rule-of-thumb check";e='<div class="warn">Final slab thickness and reinforcement require structural analysis and code checks.</div>'}
+else if(n==="Staircase"){let steps=Math.ceil(num("h")*1000/num("r"));v=steps;u="risers";f="Floor height ÷ riser";e=`<div>Approx. going length: ${fmt(steps*num("t")/1000)} m</div>`}
+else if(n==="Load Calculator"){v=(num("area")*(num("dead")+num("live"))+num("wall"))*num("floors");u="kN";f="Area × (dead+live) + wall load, × floors"}
+else if(n==="Earthquake/Wind Guide"){v=num("z");u="Z";f="Input seismic coefficient";e=`<div>Importance factor: ${fmt(num("i"))}<br>Basic wind speed: ${fmt(num("wind"))} m/s</div><div class="warn">Use the applicable BNBC provisions and site-specific parameters for design.</div>`}
+else if(n==="Structural Rebar Guide"){v=num("dia")**2/162.2*num("len")*num("bars");u="kg main bars";f="d²/162.2 × length × number of bars";e=`<div>Stirrups: ${fmt(num("st"))} mm @ ${fmt(num("sp"))} mm</div><div class="warn">Rebar diameter/spacing must follow the final structural design.</div>`}
+else if(n==="Structural BOQ"){v=num("concrete")*1440/50;u="cement bags (approx.)";f="Concrete × 1.54 × cement share approximation";e=`<div>Steel: ${fmt(num("steel"))} kg<br>Bricks: ${fmt(num("brick"))} pcs<br>Sand: ${fmt(num("sand"))} m³<br>Stone: ${fmt(num("stone"))} m³</div>`}
+else if(n==="Unit Converter"){let x=num("v"),a=$("from").value,b=$("to").value;let map={m:x,ft:x*.3048,mm:x/1000,in:x*.0254,"m²":x,"sq ft":x*.09290304,"m³":x,CFT:x*.0283168466,kg:x,ton:x*1000};let base=map[a];let out={m:base,ft:base/.3048,mm:base*1000,in:base/.0254,"m²":base,"sq ft":base/.09290304,"m³":base,CFT:base/.0283168466,kg:base,ton:base/1000}[b];v=out;u=b;f="SI/base conversion"}
+else if(n==="Percentage"){v=num("v")*num("p")/100;u="";f="Value × percentage ÷ 100"}
+else if(n==="Ratio"){v=num("a")/num("b");u="A/B";f="A ÷ B"}
+else if(n==="Slope/Gradient"){v=num("r")/num("run")*100;u="%";f="Rise ÷ Run × 100"}
+else if(n==="Number of Materials"){v=num("q")*(1+num("w")/100);u="units";f="Quantity × (1+wastage%)"}
+if(n!=="Concrete Volume" && n!=="RCC Mix" && n!=="Concrete Ingredients"){
+  const rr=num("resultRate"); if(rr>0 && Number.isFinite(v)) e+=`<div style="margin-top:8px"><b>Material/result cost:</b> ৳ ${fmt(v*rr)} <span class="formula">(${fmt(v)} × ৳${fmt(rr)})</span></div>`;
+}
+show(v,u,f,e)
+}
+function landExtra(sq){return `<div>Decimal: <b>${fmt(sq/435.6)}</b><br>Katha: <b>${fmt(sq/720)}</b><br>Bigha: <b>${fmt(sq/14400)}</b><br>m²: <b>${fmt(sq*.09290304)}</b></div>`}
+function saveResult(){let a=JSON.parse(localStorage.scc_saved||"[]");a.unshift({name:nm(current),text:$("calcResult").innerText,date:new Date().toLocaleString()});localStorage.scc_saved=JSON.stringify(a.slice(0,100));renderHome();alert(T[lang].done)}
+function copyResult(){navigator.clipboard?.writeText($("calcResult").innerText);alert(T[lang].done)}
+function renderSaved(){let a=JSON.parse(localStorage.scc_saved||"[]");$("savedList").innerHTML=a.length?a.map((x,i)=>`<div class="card" style="margin-bottom:8px"><b>${x.name}</b><small>${x.date}</small><p>${x.text}</p><button class="secondary" onclick="removeSaved(${i})">${T[lang].clear}</button></div>`).join(""):`<div class="notice">No saved calculations.</div>`}
+function removeSaved(i){let a=JSON.parse(localStorage.scc_saved||"[]");a.splice(i,1);localStorage.scc_saved=JSON.stringify(a);renderSaved();renderHome()}
+function toggleTheme(){let names=["","dark","blue","green","purple"],cur=localStorage.scc_theme||"";let i=(names.indexOf(cur)+1)%names.length;localStorage.scc_theme=names[i];applyTheme()}
+function applyTheme(){document.body.classList.remove("dark","blue","green","purple");let x=localStorage.scc_theme;if(x)document.body.classList.add(x)}
+function renderSettings(){$("settingsBox").innerHTML=`
+<div class="card">
+<div class="field"><label>Language</label><select onchange="setLanguage(this.value)"><option value="bn" ${lang==="bn"?"selected":""}>বাংলা</option><option value="en" ${lang==="en"?"selected":""}>English</option></select></div>
+<div class="field"><label>Global Unit</label><select onchange="setUnit(this.value)"><option value="metric" ${unit==="metric"?"selected":""}>Metric — m / mm / m² / m³</option><option value="imperial" ${unit==="imperial"?"selected":""}>Imperial — ft / in / sq ft / CFT</option></select></div>
+<div class="field"><label>Theme</label><select onchange="localStorage.scc_theme=this.value;applyTheme()"><option value="" ${!localStorage.scc_theme?"selected":""}>Default</option><option value="dark" ${localStorage.scc_theme==="dark"?"selected":""}>Dark</option><option value="blue" ${localStorage.scc_theme==="blue"?"selected":""}>Blue</option><option value="green" ${localStorage.scc_theme==="green"?"selected":""}>Green</option><option value="purple" ${localStorage.scc_theme==="purple"?"selected":""}>Purple</option></select></div>
+<button class="secondary" style="width:100%;margin-bottom:8px" onclick="window.print()">🖨 Print / Save as PDF</button>
+<button class="danger" style="width:100%" onclick="localStorage.removeItem('scc_saved');renderSaved();renderHome()">Clear Saved Calculations</button>
+</div>
+<div class="warn" style="margin-top:12px"><b>Structural safety:</b> Footing, column, beam, slab and rebar outputs are preliminary estimating aids. They are not construction-ready structural designs. Final design must be checked by a qualified Structural Engineer using BNBC, soil report, loads, span, material grades and seismic/wind requirements.</div>
+<div class="notice" style="margin-top:12px"><b>AI Connection:</b> The standalone file does not contain a secret API key. For real online AI, connect a secure backend/API endpoint here rather than exposing a provider key inside the browser.</div>`}
+function askAI(){let q=$("aiQuestion").value.trim();if(!q)return;let chat=$("chat");chat.innerHTML+=`<div class="msg user"><b>You:</b> ${escapeHTML(q)}</div>`;let a=localAnswer(q);chat.innerHTML+=`<div class="msg ai"><b>AI Assistant:</b><br>${a}</div>`;$("aiQuestion").value="";chat.scrollTop=chat.scrollHeight}
+function escapeHTML(s){return s.replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function localAnswer(q){let x=q.toLowerCase();if(x.includes("footing")||x.includes("ফুটিং"))return"Footing নির্ধারণে building load, column load, soil bearing capacity, foundation depth, settlement, bending, one/two-way shear এবং applicable BNBC checks প্রয়োজন। শুধু তলা সংখ্যা দিয়ে final footing size বা rebar নির্ধারণ করা নিরাপদ নয়।";if(x.includes("column")||x.includes("কলাম"))return"Column design-এর জন্য axial load-এর পাশাপাশি bending moment, slenderness, concrete/steel grade, seismic detailing, tie spacing এবং load combinations প্রয়োজন।";if(x.includes("beam")||x.includes("বীম")||x.includes("বিম"))return"Beam-এর size ও rebar span, loads, support condition, bending, shear, deflection এবং development length-এর উপর নির্ভর করে।";if(x.includes("brick")||x.includes("ইট"))return"ইটের quantity সাধারণভাবে net wall volume ÷ brick module volume × wastage দিয়ে হিসাব করা যায়। Door/window opening বাদ দিতে হবে।";if(x.includes("rod")||x.includes("রড"))return"রডের ওজনের প্রচলিত সূত্র: d²/162.2 × length(m), যেখানে d = bar diameter in mm।";if(x.includes("wood")||x.includes("কাঠ"))return"কাঠের CFT: Length(ft) × Width(in) × Thickness(in) ÷ 144 × quantity।";if(x.includes("soil")||x.includes("মাটি"))return"মাটি কাটার volume = Length × Width × Depth × quantity। Soil bulking/shrinkage আলাদা করে ধরতে হতে পারে।";return"এই প্রশ্নের জন্য নির্দিষ্ট input দিলে আরও ভালো উত্তর পাওয়া যাবে—যেমন building floors, span, soil SBC, member size, load বা material grade। Structural final design অবশ্যই Engineer দিয়ে verify করুন।"}
+function refreshUI(){let t=T[lang];document.querySelectorAll("[data-t]").forEach(e=>e.textContent=t[e.dataset.t]);$("heroTitle").textContent=lang==="bn"?"সব Construction হিসাব এক জায়গায়":"All Construction Calculations in One Place";$("heroText").textContent=lang==="bn"?"মালামাল, রড, কাঠ, ইট, মাটি, জমি, বাজেট ও Structural Guide—সব আলাদা আলাদা অপশনে।":"Materials, steel, wood, brick, earthwork, land, budget and structural tools—each as a separate option.";$("startBtn").textContent=lang==="bn"?"হিসাব শুরু করুন →":"Start Calculating →";$("search").placeholder=t.search;$("quickTitle").textContent=t.quick;$("recentTitle").textContent=t.recent;$("language").value=lang;$("globalUnit").value=unit;renderHome();renderCategories();if($("settings").classList.contains("active"))renderSettings();if($("savedPage").classList.contains("active"))renderSaved();applyTheme()}
+applyTheme();refreshUI();
+</script>
+
+<script>
+/* FINAL v6 corrections: optional inputs, brick wall thickness presets,
+   consistent ft/m handling, aggregate-to-brick estimate, online AI hook. */
+(function(){
+  function n(id){var e=document.getElementById(id); return e?parseFloat(e.value)||0:0;}
+  
+function addHomeDeleteControlsV14(n){
+ const box=document.getElementById("calcFields");
+ if(!box || box.dataset.v14==="1") return;
+ box.dataset.v14="1";
+ const bar=document.createElement("div");
+ bar.className="v14-actions";
+ bar.innerHTML=`<button type="button" class="v14-home" onclick="moveCurrentToHomeV14()">⌂ হোমে নিন</button>
+ <button type="button" class="v14-delete" onclick="deleteCurrentCalculatorV14()">🗑 ডিলিট</button>`;
+ box.insertBefore(bar,box.firstChild);
+}
+function moveCurrentToHomeV14(){
+ const name=window.current;
+ if(!name)return;
+ let homes=JSON.parse(localStorage.getItem("sazzadHomeCalculatorsV14")||"[]");
+ if(!homes.includes(name)) homes.push(name);
+ localStorage.setItem("sazzadHomeCalculatorsV14",JSON.stringify(homes));
+ renderHomeShortcutsV14();
+ alert("এই ক্যালকুলেটরটি হোমে যোগ হয়েছে।");
+}
+function deleteCurrentCalculatorV14(){
+ const name=window.current;
+ if(!name)return;
+ if(!confirm("এই ক্যালকুলেটরটি হোম/অ্যাপের তালিকা থেকে মুছে ফেলবেন?"))return;
+ let hidden=JSON.parse(localStorage.getItem("sazzadHiddenCalculatorsV14")||"[]");
+ if(!hidden.includes(name)) hidden.push(name);
+ localStorage.setItem("sazzadHiddenCalculatorsV14",JSON.stringify(hidden));
+ renderHomeShortcutsV14();
+ if(typeof goHome==="function")goHome(); else if(typeof home==="function")home();
+}
+function restoreDeletedCalculatorsV14(){
+ localStorage.removeItem("sazzadHiddenCalculatorsV14");
+ renderHomeShortcutsV14();
+ alert("ডিলিট করা ক্যালকুলেটরগুলো আবার দেখা যাবে।");
+}
+function isHiddenV14(n){
+ return new Set(JSON.parse(localStorage.getItem("sazzadHiddenCalculatorsV14")||"[]")).has(n);
+}
+function renderHomeShortcutsV14(){
+ const h=document.getElementById("v14HomeShortcuts"); if(!h)return;
+ const homes=JSON.parse(localStorage.getItem("sazzadHomeCalculatorsV14")||"[]");
+ const hidden=new Set(JSON.parse(localStorage.getItem("sazzadHiddenCalculatorsV14")||"[]"));
+ const names=homes.filter(x=>!hidden.has(x));
+ h.innerHTML=names.length?`<div class="v14-title">⭐ আমার হোম ক্যালকুলেটর</div>`+names.map(x=>`<button type="button" onclick="openV14Calculator(${JSON.stringify(x)})">${x}</button>`).join(""):`<div class="small">হোমে নেওয়া calculator এখানে দেখাবে।</div>`;
+}
+function openV14Calculator(n){
+ if(typeof show==="function"){show(n);return;}
+ if(typeof openCalculator==="function"){openCalculator(n);return;}
+}
+
+function show(id,html){var e=document.getElementById(id); if(e){e.style.display='block';e.innerHTML=html;}}
+  function f(x,d){return Number(x||0).toLocaleString('bn-BD',{maximumFractionDigits:d||2});}
+  function selectedUnit(){
+    var e=document.querySelector('#globalUnit,input[name="globalUnit"]:checked,input[name="unit"]:checked');
+    return e && e.value==='m'?'m':'ft';
+  }
+
+  /* Brick wall thickness presets + custom; values are internally converted to ft. */
+  window.applyBrickThickness = function(){
+    var sel=document.getElementById('brickThicknessPreset');
+    var inp=document.getElementById('brickT');
+    if(!sel||!inp)return;
+    if(sel.value==='custom'){inp.disabled=false; inp.value='';}
+    else {inp.disabled=true; inp.value=sel.value;}
+    var u=selectedUnit();
+    var lab=document.getElementById('brickThicknessUnit');
+    if(lab)lab.textContent=u==='m'?'m':'in';
+  };
+
+  window.calcBrickV6 = function(){
+    var u=selectedUnit(), L=n('brickL'), H=n('brickH'), Q=n('brickQty')||1, T=n('brickT');
+    var preset=document.getElementById('brickThicknessPreset');
+    if(preset && preset.value!=='custom' && T<=0) T=parseFloat(preset.value)||0;
+    if(L<=0||H<=0||T<=0) { alert('শুধু প্রয়োজনীয় মাপগুলো দিন।'); return; }
+    var lengthFt=u==='ft'?L:L*3.28084;
+    var heightFt=u==='ft'?H:H*3.28084;
+    var thicknessFt=u==='ft'?T/12:T*3.28084;
+    var cft=lengthFt*heightFt*thicknessFt*Q;
+    var bricks=Math.ceil(cft*14.5);
+    var p=n('pBrick'), cost=p?bricks/1000*p:null;
+    show('brickResult',
+      'Wall volume: <b>'+f(cft)+' CFT</b><br>'+
+      'প্রয়োজনীয় ইট: <b>'+f(bricks,0)+' পিস</b>'+
+      (cost!==null?'<br>ইটের খরচ: <b>৳ '+f(cost)+'</b>':'<br><span class="small">ইটের দাম দেওয়া হয়নি—তবুও হিসাব সম্পূর্ণ হয়েছে।</span>')
+    );
+  };
+
+  /* Replace brick UI labels/controls when available. */
+  function enhanceBrick(){
+    var card=document.getElementById('brickL');
+    if(!card || document.getElementById('brickThicknessPreset')) return;
+    var parent=card.closest('.card')||card.parentElement.parentElement;
+    var t=document.getElementById('brickT');
+    if(!t)return;
+    var wrap=t.parentElement;
+    var old=wrap.innerHTML;
+    wrap.innerHTML='<label>Wall Thickness</label>'+
+      '<select id="brickThicknessPreset" onchange="applyBrickThickness()">'+
+      '<option value="4.5">4.5 inch (≈ half brick)</option>'+
+      '<option value="5">5 inch</option>'+
+      '<option value="9">9 inch (≈ one brick)</option>'+
+      '<option value="10">10 inch</option>'+
+      '<option value="custom">Custom</option></select>'+
+      '<label>Thickness / পুরুত্ব (<span id="brickThicknessUnit">in</span>)</label>'+
+      '<input id="brickT" type="number" step="0.01" value="5">'+
+      '<div class="small">মিটার Unit হলে thickness মিটারে দিন; inch preset ব্যবহার করলে সেটি স্বয়ংক্রিয়ভাবে convert হবে।</div>';
+    var btn=parent.querySelector('button[onclick*="calcBrick"]');
+    if(btn) btn.setAttribute('onclick','calcBrickV6()');
+    applyBrickThickness();
+  }
+
+  /* Add aggregate-to-brick estimate inside concrete result area without disturbing
+     the existing concrete calculator. */
+  function addAggregateBrickUI(){
+    var r=document.getElementById('concreteResult');
+    if(!r || document.getElementById('aggBrickBox')) return;
+    var box=document.createElement('div');
+    box.id='aggBrickBox';
+    box.className='pricebox';
+    box.innerHTML='<strong>🧱 খোয়া/Aggregate থেকে ইটের পরিমাণ (Estimate)</strong>'+
+      '<p class="small">ঢালাইয়ে ব্যবহৃত মোট Aggregate CFT থেকে আনুমানিক ইটের equivalent quantity দেখাবে। এটি বাস্তব brick production নয়; volume comparison estimate।</p>'+
+      '<label>খোয়া/Aggregate CFT</label><input id="aggForBrick" type="number" step="0.01" placeholder="খালি রাখলে ঢালাইয়ের aggregate ব্যবহার হবে">'+
+      '<label>প্রতি CFT আনুমানিক ইট</label><input id="bricksPerCft" type="number" value="14.5" step="0.1">'+
+      '<button type="button" onclick="calcAggToBrick()">ইটের পরিমাণ বের করুন</button>'+
+      '<div id="aggBrickResult" class="result"></div>';
+    r.parentNode.insertBefore(box,r.nextSibling);
+  }
+  window.calcAggToBrick=function(){
+    var c=n('aggForBrick'), rate=n('bricksPerCft')||14.5;
+    if(c<=0){alert('খোয়ার CFT দিন।');return;}
+    show('aggBrickResult','আনুমানিক ইটের পরিমাণ: <b>'+f(Math.ceil(c*rate),0)+' পিস</b><br><span class="small">'+f(c)+' CFT × '+f(rate,1)+' পিস/CFT</span>');
+  };
+
+  /* Online AI UI: secure backend endpoint placeholder. No API key is exposed in frontend. */
+  function addAI(){
+    if(document.getElementById('onlineAI')) return;
+    var app=document.querySelector('.app')||document.body;
+    var c=document.createElement('div'); c.className='card'; c.id='onlineAI';
+    c.innerHTML='<h2>🤖 Online AI Assistant</h2>'+
+      '<p class="small">Construction/Civil Engineering প্রশ্ন করুন। Secure backend যুক্ত করলে এটি online AI response দেবে।</p>'+
+      '<textarea id="aiQuestion" style="width:100%;min-height:90px;padding:10px;border:1px solid #d5dce3;border-radius:8px" placeholder="যেমন: 1:2:4 ratio-তে 100 CFT concrete-এর জন্য কত মালামাল লাগবে?"></textarea>'+
+      '<button type="button" onclick="askOnlineAI()">AI-কে জিজ্ঞেস করুন</button>'+
+      '<div id="aiResult" class="result"></div>';
+    app.appendChild(c);
+  }
+  window.askOnlineAI=async function(){
+    var q=(document.getElementById('aiQuestion').value||'').trim();
+    if(!q){alert('প্রশ্ন লিখুন।');return;}
+    show('aiResult','AI উত্তর প্রস্তুত করা হচ্ছে...');
+    /* Secure backend endpoint. Set this URL on deployment; never place an API key here. */
+    var endpoint=window.AI_BACKEND_URL||'/api/ai';
+    try{
+      var res=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:q})});
+      if(!res.ok) throw new Error('backend unavailable');
+      var data=await res.json();
+      show('aiResult','<b>AI:</b><br>'+String(data.answer||'উত্তর পাওয়া যায়নি।').replace(/\n/g,'<br>'));
+    }catch(e){
+      show('aiResult','<b>Online AI এখনো সংযুক্ত হয়নি।</b><br><span class="small">এই App-এ API key নিরাপদ রাখতে একটি secure backend endpoint (/api/ai) সংযুক্ত করতে হবে।</span>');
+    }
+  };
+
+  function boot(){
+    enhanceBrick(); addAI(); addAggregateBrickUI();
+    /* When Unit changes, refresh brick preset label and values. */
+    var u=document.getElementById('globalUnit');
+    if(u)u.addEventListener('change',function(){setTimeout(applyBrickThickness,50);});
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',boot); else boot();
+})();
+</script>
+
+
+
+
+
+<div class="update-box-v11" id="ownerUpdateBox">
+<b>Owner Update / অ্যাপ আপডেট</b>
+<div class="optional-note-v11">আপনি এই অ্যাপের master version প্রকাশ করলে ব্যবহারকারীরা নতুন version-এর ZIP/hosted URL দিয়ে update করতে পারবে। এখানে version ও update URL সংরক্ষণ করা যাবে।</div>
+<div class="two"><div class="field"><label>Current version</label><input id="ownerVersion" value="v13"></div><div class="field"><label>Update URL</label><input id="ownerUpdateUrl" placeholder="আপনার GitHub Pages / hosting URL"></div></div>
+<button type="button" onclick="saveOwnerUpdateV11()">Save Update Settings</button>
+<div id="ownerUpdateStatus" class="optional-note-v11"></div>
+</div>
+<script>
+function saveOwnerUpdateV11(){
+ localStorage.setItem("ownerVersionV11",document.getElementById("ownerVersion")?.value||"v11");
+ localStorage.setItem("ownerUpdateUrlV11",document.getElementById("ownerUpdateUrl")?.value||"");
+ const e=document.getElementById("ownerUpdateStatus");if(e)e.textContent="Update settings saved on this device.";
+}
+</script>
+
+<div class="update-box-v11" id="appHealthV12">
+<b>App Health Check</b>
+<div class="optional-note-v11">অ্যাপের calculator/navigation সমস্যা দ্রুত পরীক্ষা করার জন্য।</div>
+<button type="button" onclick="runAppCheckV12()">Check App</button>
+<div id="appHealthResultV12" class="optional-note-v11"></div>
+</div>
+<script>
+function runAppCheckV12(){
+ const checks=[
+ ["Navigation",typeof show==="function"],
+ ["Calculation engine",typeof calculateCurrent==="function"],
+ ["Wood calculator",typeof calcWoodV12==="function"],
+ ["Rebar calculator",typeof calcRQ==="function"],
+ ["Unit switch",typeof syncAllUnitsV11==="function"]
+ ];
+ const bad=checks.filter(x=>!x[1]);
+ const e=document.getElementById("appHealthResultV12");
+ if(e)e.innerHTML=bad.length?"❌ "+bad.map(x=>x[0]).join(", ")+" সমস্যা":"✅ সব প্রধান engine ঠিক আছে";
+}
+</script>
+<script>
+if("serviceWorker" in navigator && location.protocol!=="file:"){
+ window.addEventListener("load",()=>navigator.serviceWorker.register("./sw.js").catch(()=>{}));
+}
+</script>
+
+<script id="v15-online-jobs">
+const V15_API_KEY=""; // Optional: your secure backend should authenticate Admin actions server-side.
+const V15_API_BASE=localStorage.getItem("v15ApiBase")||"";
+function v15Escape(x){return String(x??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function v15Jobs(){
+ let raw=localStorage.getItem("v15Jobs");
+ try{return JSON.parse(raw||"[]")}catch(e){return[]}
+}
+function v15SaveJobs(a){localStorage.setItem("v15Jobs",JSON.stringify(a));}
+function v15JobBoard(){
+ const root=document.getElementById("v15JobsRoot");if(!root)return;
+ const jobs=v15Jobs().filter(j=>j.status!=="closed");
+ root.innerHTML=`<div class="v15-panel"><h3>💼 Civil Engineering Jobs</h3>
+ <div class="small">অনলাইন job circular, apply এবং CV upload-এর জন্য প্রস্তুত Job Board।</div>
+ <div id="v15JobList"></div></div>`;
+ const list=document.getElementById("v15JobList");
+ if(!jobs.length){list.innerHTML='<div class="small">এখনো কোনো circular যোগ করা হয়নি। Admin panel থেকে যোগ করুন।</div>';return;}
+ list.innerHTML=jobs.map(j=>`<div class="v15-job">
+ <h4>${v15Escape(j.title)}</h4><div><span class="v15-badge">${v15Escape(j.company||"Company")}</span> ${v15Escape(j.location||"")}</div>
+ <div class="small">Deadline: ${v15Escape(j.deadline||"Not specified")}</div>
+ <p>${v15Escape(j.description||"")}</p>
+ <button class="v15-btn v15-primary" onclick="v15OpenApply('${v15Escape(j.id)}')">Apply + CV Upload</button>
+ ${j.externalUrl?`<button class="v15-btn v15-muted" onclick="window.open(${JSON.stringify(j.externalUrl)},'_blank')">External Apply</button>`:""}
+ </div>`).join("");
+}
+function v15OpenApply(id){
+ const j=v15Jobs().find(x=>x.id===id);if(!j)return;
+ const root=document.getElementById("v15JobsRoot");
+ root.innerHTML=`<div class="v15-panel"><h3>Apply: ${v15Escape(j.title)}</h3>
+ <div class="v15-grid">
+ <div><label>নাম</label><input id="v15Name"></div>
+ <div><label>Email</label><input id="v15Email" type="email"></div>
+ <div><label>Phone</label><input id="v15Phone"></div>
+ <div><label>Experience</label><input id="v15Exp" placeholder="e.g. 5 years"></div>
+ </div>
+ <label>Cover Letter (optional)</label><textarea id="v15Cover" style="width:100%;min-height:100px"></textarea>
+ <label>CV / Resume (PDF/DOC/DOCX)</label><input id="v15CV" type="file" accept=".pdf,.doc,.docx">
+ <button class="v15-btn v15-primary" onclick="v15SubmitApplication('${v15Escape(id)}')">Submit Application</button>
+ <button class="v15-btn v15-muted" onclick="v15JobBoard()">Back to Jobs</button>
+ <div id="v15ApplyMsg" class="small"></div></div>`;
+}
+function v15SubmitApplication(id){
+ const j=v15Jobs().find(x=>x.id===id), file=document.getElementById("v15CV")?.files?.[0];
+ const app={id:Date.now().toString(),jobId:id,jobTitle:j?.title||"",name:document.getElementById("v15Name")?.value,email:document.getElementById("v15Email")?.value,phone:document.getElementById("v15Phone")?.value,experience:document.getElementById("v15Exp")?.value,cover:document.getElementById("v15Cover")?.value,cvName:file?.name||"",createdAt:new Date().toISOString()};
+ if(!app.name||!app.email||!file){document.getElementById("v15ApplyMsg").textContent="নাম, Email এবং CV দিন।";return;}
+ // Offline fallback: store application locally. Production mode should POST to your secure backend.
+ let a=[];try{a=JSON.parse(localStorage.getItem("v15Applications")||"[]")}catch(e){}
+ a.push(app);localStorage.setItem("v15Applications",JSON.stringify(a));
+ document.getElementById("v15ApplyMsg").innerHTML="✅ Application saved. Online production mode-এ CV file backend storage-এ upload হবে।";
+}
+function v15Admin(){
+ const root=document.getElementById("v15AdminRoot");if(!root)return;
+ root.innerHTML=`<div class="v15-panel"><h3>🔐 Admin Job Manager</h3>
+ <div class="small">শুধু আপনার secure backend authentication ব্যবহার করে production-এ এই অংশ চালাবেন।</div>
+ <div class="v15-grid">
+ <div><label>Job title</label><input id="jTitle"></div><div><label>Company</label><input id="jCompany"></div>
+ <div><label>Location</label><input id="jLocation"></div><div><label>Deadline</label><input id="jDeadline" type="date"></div>
+ </div>
+ <label>Description</label><textarea id="jDesc" style="width:100%;min-height:90px"></textarea>
+ <label>External Apply URL (optional)</label><input id="jUrl" placeholder="Official application page">
+ <button class="v15-btn v15-primary" onclick="v15AddJob()">Publish Circular</button>
+ <button class="v15-btn v15-muted" onclick="v15LoadApps()">View Applications</button>
+ <div id="v15Apps"></div></div>`;
+}
+function v15AddJob(){
+ const j={id:Date.now().toString(),title:document.getElementById("jTitle").value,company:document.getElementById("jCompany").value,location:document.getElementById("jLocation").value,deadline:document.getElementById("jDeadline").value,description:document.getElementById("jDesc").value,externalUrl:document.getElementById("jUrl").value,status:"open"};
+ if(!j.title){alert("Job title দিন");return} let a=v15Jobs();a.push(j);v15SaveJobs(a);v15JobBoard();alert("Circular saved.");}
+function v15LoadApps(){
+ const e=document.getElementById("v15Apps");let a=[];try{a=JSON.parse(localStorage.getItem("v15Applications")||"[]")}catch(x){}
+ e.innerHTML=a.length?a.map(x=>`<div class="v15-job"><b>${v15Escape(x.jobTitle)}</b><br>${v15Escape(x.name)} — ${v15Escape(x.email)} — ${v15Escape(x.phone)}<br>CV: ${v15Escape(x.cvName)}</div>`).join(""):"<div class='small'>No applications.</div>";
+}
+function v15AddToHome(){
+ const home=document.getElementById("v15HomeJobs");if(!home)return;
+ home.innerHTML=`<button class="v15-btn v15-primary" onclick="v15JobBoard()">💼 Civil Engineer Jobs</button>`;
+}
+</script>
+
+<div class="v15-panel" id="v15HomeJobs">
+<h3>💼 চাকরি ও Career</h3>
+<p class="small">Civil Engineer/Construction job circular দেখুন এবং নিজের CV দিয়ে apply করুন।</p>
+<button class="v15-btn v15-primary" onclick="v15JobBoard()">Job Circulars</button>
+<button class="v15-btn v15-muted" onclick="v15Admin()">Admin Job Manager</button>
+</div>
+<div id="v15JobsRoot"></div><div id="v15AdminRoot"></div>
+<script>window.addEventListener("load",()=>v15AddToHome());</script>
+
+<div id="v16SecurityRoot"></div><div id="v16OnlineRoot"></div>
+<script>window.addEventListener("load",()=>{v16AuthPanel();v16JobsPanel()});</script>
+
+<script id="v16-online-core">
+/*
+ V16 architecture:
+ - Frontend never stores Gmail password or admin secret.
+ - Admin authentication must be handled by the backend (OAuth/email OTP/session).
+ - Job feeds are fetched from backend, which normalizes approved sources.
+ - CV files go to authenticated backend object storage.
+*/
+const V16_DEFAULT_API="";
+function v16Api(){return localStorage.getItem("v16ApiBase")||V16_DEFAULT_API}
+function v16SetApi(v){localStorage.setItem("v16ApiBase",String(v||"").replace(/\/+$/,""))}
+async function v16Fetch(path,options={}){
+ const base=v16Api(); if(!base) throw new Error("Backend URL is not configured.");
+ const res=await fetch(base+path,{credentials:"include",...options});
+ if(!res.ok) throw new Error("Server error "+res.status);
+ return res;
+}
+function v16AuthPanel(){
+ const root=document.getElementById("v16SecurityRoot");if(!root)return;
+ root.innerHTML=`<div class="v15-panel"><h3>🔐 Admin Security</h3>
+ <p class="small">Gmail/Google login বা secure Email OTP ব্যবহার করুন। পাসওয়ার্ড এই অ্যাপে রাখা হবে না।</p>
+ <div class="v15-grid">
+ <div><label>Admin Gmail</label><input id="v16AdminEmail" type="email" placeholder="your@gmail.com"></div>
+ <div><label>Backend API</label><input id="v16Api" placeholder="https://your-domain.com/api" value="${v15Escape(v16Api())}"></div>
+ </div>
+ <button class="v15-btn v15-primary" onclick="v16SaveSecurity()">Save Security Settings</button>
+ <button class="v15-btn v15-muted" onclick="v16AdminLogin()">Admin Login</button>
+ <div id="v16SecurityMsg" class="small"></div></div>`;
+}
+function v16SaveSecurity(){
+ const email=document.getElementById("v16AdminEmail")?.value.trim();
+ if(email)localStorage.setItem("v16AdminEmail",email);
+ v16SetApi(document.getElementById("v16Api")?.value.trim());
+ document.getElementById("v16SecurityMsg").textContent="Security settings saved locally. Authentication remains server-side.";
+}
+async function v16AdminLogin(){
+ try{
+  const r=await v16Fetch("/auth/google/start",{method:"POST"});
+  const data=await r.json(); if(data.url) location.href=data.url;
+ }catch(e){
+  document.getElementById("v16SecurityMsg").textContent="Online login requires your secure backend. Configure the API URL first.";
+ }
+}
+async function v16LoadJobsOnline(){
+ try{
+  const r=await v16Fetch("/jobs?category=civil-engineering&country=BD");
+  const jobs=await r.json();
+  localStorage.setItem("v16LastJobs",JSON.stringify(jobs));
+  v16RenderOnlineJobs(jobs);
+ }catch(e){
+  let jobs=[];try{jobs=JSON.parse(localStorage.getItem("v16LastJobs")||"[]")}catch(_){}
+  v16RenderOnlineJobs(jobs,true);
+ }
+}
+function v16RenderOnlineJobs(jobs,offline=false){
+ const root=document.getElementById("v16OnlineJobsList");if(!root)return;
+ root.innerHTML=(offline?'<div class="small">Online feed এখন পাওয়া যাচ্ছে না; শেষ পাওয়া data দেখানো হচ্ছে।</div>':'')+
+ (jobs.length?jobs.map(j=>`<div class="v15-job"><h4>${v15Escape(j.title||"Civil Engineering Job")}</h4>
+ <div><span class="v15-badge">${v15Escape(j.company||"")}</span> ${v15Escape(j.location||"")}</div>
+ <div class="small">Published: ${v15Escape(j.publishedAt||"")} · Deadline: ${v15Escape(j.deadline||"")}</div>
+ <p>${v15Escape(j.summary||j.description||"")}</p>
+ <button class="v15-btn v15-primary" onclick="v16ApplyOnline('${v15Escape(j.id)}')">Apply / Details</button>
+ </div>`).join(""):'<div class="small">কোনো online civil-engineering circular পাওয়া যায়নি।</div>');
+}
+async function v16ApplyOnline(id){
+ try{
+  const r=await v16Fetch("/jobs/"+encodeURIComponent(id)); const j=await r.json();
+  const url=j.applyUrl||j.officialUrl;
+  if(url)window.open(url,"_blank"); else alert("এই circular-এর official application link পাওয়া যায়নি।");
+ }catch(e){alert("Online job details পাওয়া যায়নি।");}
+}
+async function v16SubmitCV(form){
+ const file=document.getElementById("v16CVFile")?.files?.[0];
+ if(!file){alert("CV file নির্বাচন করুন।");return}
+ if(file.size>10*1024*1024){alert("CV সর্বোচ্চ 10MB হতে হবে।");return}
+ const fd=new FormData();fd.append("cv",file);fd.append("name",document.getElementById("v16CVName")?.value||"");fd.append("email",document.getElementById("v16CVEmail")?.value||"");
+ try{
+  const r=await v16Fetch("/applications",{method:"POST",body:fd});
+  alert((await r.json()).message||"CV submitted.");
+ }catch(e){alert("Online CV upload-এর জন্য secure backend প্রয়োজন।")}
+}
+function v16JobsPanel(){
+ const root=document.getElementById("v16OnlineRoot");if(!root)return;
+ root.innerHTML=`<div class="v15-panel"><h3>🌐 Live Civil Engineering Jobs</h3>
+ <p class="small">Backend থেকে প্রতিদিন/নির্ধারিত সময়ে approved online sources থেকে circular sync হবে।</p>
+ <button class="v15-btn v15-primary" onclick="v16LoadJobsOnline()">🔄 Refresh Jobs</button>
+ <div id="v16OnlineJobsList"></div>
+ <hr>
+ <h4>📄 Upload CV</h4>
+ <input id="v16CVName" placeholder="আপনার নাম"><input id="v16CVEmail" type="email" placeholder="Gmail / Email">
+ <input id="v16CVFile" type="file" accept=".pdf,.doc,.docx">
+ <button class="v15-btn v15-primary" onclick="v16SubmitCV(this)">Upload CV</button></div>`;
+ v16LoadJobsOnline();
+}
+</script>
+
+<div class="v15-panel" id="v16AdminFeed">
+<h3>🛠️ Admin: Job Feed Control</h3>
+<p class="small">Admin backend-এ source approval, duplicate removal, category filter, deadline filter এবং manual publish control থাকবে।</p>
+<button class="v15-btn v15-primary" onclick="v16AdminLogin()">🔐 Secure Admin Login</button>
+</div>
+</body>
+</html>

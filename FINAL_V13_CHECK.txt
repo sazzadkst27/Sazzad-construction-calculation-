@@ -1,0 +1,7 @@
+FINAL v13 checked:
+- Fixed the major calculation dispatcher bug that could break unrelated calculators.
+- Wood calculator limited to rectangular timber, round logs and planks.
+- Brick quantity now has optional brick dimensions, joint, opening, wastage and price; core calculation does not require optional fields.
+- Paint, Floor Tiles and Ceiling calculations now respect global metric/imperial units.
+- Added PWA service worker with cache versioning so published updates can propagate to installed users after the master app is updated.
+- Existing theme, navigation, AI, saved/print options and calculators retained.

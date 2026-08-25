@@ -1,0 +1,8 @@
+V16 Online Architecture
+1. Secure backend is required for real multi-user sync.
+2. Admin authentication: Google OAuth/Gmail or Email OTP; no Gmail password stored in frontend.
+3. Job feed: backend fetches/normalizes approved sources and exposes /jobs?category=civil-engineering&country=BD.
+4. Application: /applications accepts authenticated multipart CV uploads.
+5. Admin can manage sources, deduplicate, approve, edit, close, and publish jobs.
+6. Frontend includes API URL and secure admin login controls.
+7. Do not scrape/copy copyrighted newspaper content wholesale; store job metadata, source URL, and official apply URL.

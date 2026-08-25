@@ -1,0 +1,7 @@
+V15:
+- Added Civil Engineering job board UI.
+- Added job circular publishing/admin UI.
+- Added apply form with CV file selector (PDF/DOC/DOCX).
+- Local fallback stores application metadata on the device.
+- Production online sync requires a secure backend for authentication, database and file storage; frontend must not contain admin secrets.
+- Backend URL can be configured in the app.

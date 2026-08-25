@@ -1,0 +1,8 @@
+FINAL v12:
+- Wood calculator redesigned around actual wood measurement use-cases: rectangular timber, round logs, planks.
+- Removed irrelevant structural labels from the wood calculator.
+- Dedicated RCC Rebar Quantity calculator retained for slab/beam/column/footing/stair/tie beam.
+- Optional inputs remain optional where possible.
+- Unit refresh and app health check added.
+- Existing theme/navigation/calculators preserved.
+- Structural quantities are preliminary estimates and require final engineering design/BNBC verification.
