@@ -35,8 +35,16 @@ button,.select, input, textarea{font:inherit}button{border:0;border-radius:11px;
 .v15-primary{background:#27ae60;color:#fff}.v15-danger{background:#c0392b;color:#fff}.v15-muted{background:#eef2f5;color:#263238}
 @media(max-width:600px){.v15-grid{grid-template-columns:1fr}}
 </style>
-</head>
-<body>
+<link rel="manifest" href="./manifest.json"><meta name="theme-color" content="#27ae60"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"></head>
+<body><style>#v17InstallBar{display:none;background:#fff;border:1px solid #dfe6e9;border-radius:12px;padding:12px;margin:10px 0}#v17InstallBar button{width:auto;margin:5px 5px 0 0}</style>
+<div id="v17InstallBar"><b>📱 অ্যাপ ইনস্টল করুন</b><div class="small">মোবাইলে App-এর মতো ব্যবহার করতে Install চাপুন।</div><button id="v17InstallBtn" type="button">⬇️ Install App</button><button id="v17UpdateBtn" type="button" style="display:none">🔄 Update App</button></div>
+<script>
+(()=>{let dp=null,b=document.getElementById("v17InstallBar"),ib=document.getElementById("v17InstallBtn"),ub=document.getElementById("v17UpdateBtn");
+addEventListener("beforeinstallprompt",e=>{e.preventDefault();dp=e;b.style.display="block"});
+ib.onclick=async()=>{if(!dp){alert("Chrome-এর ⋮ মেনু থেকে 'Add to Home screen' বা 'Install app' নির্বাচন করুন।");return}dp.prompt();await dp.userChoice;dp=null;b.style.display="none"};
+addEventListener("appinstalled",()=>b.style.display="none");
+if("serviceWorker"in navigator)addEventListener("load",async()=>{try{let r=await navigator.serviceWorker.register("./service-worker.js");if(r.waiting)ub.style.display="inline-block";r.addEventListener("updatefound",()=>{let n=r.installing;n&&n.addEventListener("statechange",()=>{if(n.state==="installed"&&navigator.serviceWorker.controller)ub.style.display="inline-block"})});ub.onclick=()=>{if(r.waiting){r.waiting.postMessage({type:"SKIP_WAITING"});location.reload()}}}catch(e){}})})();
+</script>
 <div class="app">
 <header class="top">
 <div><div class="brand">SAZZAD <span>CONSTRUCTION</span> CALCULATOR</div><div class="sub" id="sub">All-in-one Civil & Construction Calculator</div></div>
