@@ -20,6 +20,12 @@ button,.select, input, textarea{font:inherit}button{border:0;border-radius:11px;
 .aiBox{min-height:180px}.chat{display:grid;gap:8px;margin-bottom:10px}.msg{padding:10px 12px;border-radius:12px;background:var(--card);border:1px solid var(--line)}.msg.user{border-left:4px solid var(--accent)}.msg.ai{border-left:4px solid var(--accent2)}
 @media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:520px){.toolbar,.two,.three{grid-template-columns:1fr}.actions{grid-template-columns:1fr 1fr}.hero h1{font-size:22px}}
 @media print{.top,.bottom,.back,.actions,.toolbar,.search,button{display:none!important}.page{display:none!important}.page.active{display:block!important}.app{max-width:none}.card,.result{box-shadow:none;background:#fff;color:#000}}
+
+/* v18 home digital clock */
+.home-clock{margin:0 0 14px;padding:12px 16px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
+.home-clock .clock-time{font-size:28px;font-weight:900;letter-spacing:.5px;line-height:1.15;color:var(--accent)}
+.home-clock .clock-date{margin-top:5px;font-size:13px;font-weight:700;color:var(--muted)}
+@media(max-width:520px){.home-clock .clock-time{font-size:25px}.home-clock .clock-date{font-size:12px}}
 </style>
 <style id="optional-note-v11">
 .optional-note-v11{font-size:12px;opacity:.72;margin:4px 0 8px}
@@ -52,6 +58,10 @@ if("serviceWorker"in navigator)addEventListener("load",async()=>{try{let r=await
 </header>
 
 <main id="home" class="page active">
+<div class="home-clock" aria-label="Current time and date">
+  <div class="clock-time" id="homeClockTime">00:00:00 AM</div>
+  <div class="clock-date" id="homeClockDate">Wednesday, 26 August 2026</div>
+</div>
 <section class="hero"><h1 id="heroTitle">সব Construction হিসাব এক জায়গায়</h1><p id="heroText">মালামাল, রড, কাঠ, ইট, মাটি, জমি, বাজেট ও Structural Guide—সব আলাদা আলাদা অপশনে।</p><button onclick="go('categories')" id="startBtn">হিসাব শুরু করুন →</button></section>
 <div class="toolbar">
 <select id="language" onchange="setLanguage(this.value)"><option value="bn">বাংলা</option><option value="en">English</option></select>
@@ -108,6 +118,21 @@ if("serviceWorker"in navigator)addEventListener("load",async()=>{try{let r=await
 </div>
 
 <script>
+function updateHomeClock(){
+  const now=new Date();
+  let h=now.getHours();
+  const ampm=h>=12?'PM':'AM';
+  h=h%12||12;
+  const time=String(h).padStart(2,'0')+':'+String(now.getMinutes()).padStart(2,'0')+':'+String(now.getSeconds()).padStart(2,'0')+' '+ampm;
+  const days=['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
+  const months=['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const date=days[now.getDay()]+', '+now.getDate()+' '+months[now.getMonth()]+' '+now.getFullYear();
+  const t=document.getElementById('homeClockTime'),d=document.getElementById('homeClockDate');
+  if(t)t.textContent=time; if(d)d.textContent=date;
+}
+updateHomeClock();
+setInterval(updateHomeClock,1000);
+
 const T={
 bn:{home:"হোম",categories:"ক্যালকুলেটর",saved:"সেভড",ai:"AI Assistant",settings:"সেটিংস",back:"ফিরে যান",calculate:"হিসাব করুন",save:"সেভ",print:"প্রিন্ট",pdf:"PDF",copy:"কপি",clear:"মুছে ফেলুন",done:"সম্পন্ন",valid:"সঠিক মান দিন।",search:"ক্যালকুলেটর খুঁজুন...",quick:"দ্রুত অপশন",recent:"সাম্প্রতিক হিসাব",all:"সব ক্যাটাগরি"},
 en:{home:"Home",categories:"Calculators",saved:"Saved",ai:"AI Assistant",settings:"Settings",back:"Back",calculate:"Calculate",save:"Save",print:"Print",pdf:"PDF",copy:"Copy",clear:"Clear",done:"Done",valid:"Please enter valid values.",search:"Search calculator...",quick:"Quick Options",recent:"Recent Calculations",all:"All Categories"}
