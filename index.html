@@ -21,6 +21,14 @@ button,.select, input, textarea{font:inherit}button{border:0;border-radius:11px;
 @media(min-width:650px){.grid{grid-template-columns:repeat(3,1fr)}}@media(max-width:520px){.toolbar,.two,.three{grid-template-columns:1fr}.actions{grid-template-columns:1fr 1fr}.hero h1{font-size:22px}}
 @media print{.top,.bottom,.back,.actions,.toolbar,.search,button{display:none!important}.page{display:none!important}.page.active{display:block!important}.app{max-width:none}.card,.result{box-shadow:none;background:#fff;color:#000}}
 
+/* v19 mandatory update gate */
+#v19UpdateGate{display:none;position:fixed;inset:0;z-index:99999;background:rgba(7,12,20,.96);color:#fff;align-items:center;justify-content:center;padding:22px}
+#v19UpdateGate.show{display:flex}
+.v19-update-card{width:min(460px,100%);background:#fff;color:#17202a;border-radius:20px;padding:24px;box-shadow:0 20px 60px rgba(0,0,0,.35);text-align:center}
+.v19-update-icon{font-size:48px;margin-bottom:8px}.v19-update-card h2{margin:8px 0}.v19-update-card p{line-height:1.6;color:#64707d}.v19-update-card .v19-version{font-weight:800;margin:12px 0}.v19-update-card button{width:100%;margin-top:8px}.v19-update-note{font-size:12px;color:#8a95a1;margin-top:10px}
+.v19-info{margin-top:12px;padding:12px;border:1px dashed #27ae60;border-radius:10px;background:#f8fff9}
+
+
 /* v18 home digital clock */
 .home-clock{margin:0 0 14px;padding:12px 16px;text-align:center;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow)}
 .home-clock .clock-time{font-size:28px;font-weight:900;letter-spacing:.5px;line-height:1.15;color:var(--accent)}
@@ -42,7 +50,18 @@ button,.select, input, textarea{font:inherit}button{border:0;border-radius:11px;
 @media(max-width:600px){.v15-grid{grid-template-columns:1fr}}
 </style>
 <link rel="manifest" href="./manifest.json"><meta name="theme-color" content="#27ae60"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"></head>
-<body><style>#v17InstallBar{display:none;background:#fff;border:1px solid #dfe6e9;border-radius:12px;padding:12px;margin:10px 0}#v17InstallBar button{width:auto;margin:5px 5px 0 0}</style>
+<body>
+<div id="v19UpdateGate" aria-modal="true" role="dialog">
+  <div class="v19-update-card">
+    <div class="v19-update-icon">🔄</div>
+    <h2 id="v19UpdateTitle">অ্যাপ আপডেট প্রয়োজন</h2>
+    <p id="v19UpdateText">এই অ্যাপের নতুন version পাওয়া গেছে। আপডেট না করা পর্যন্ত অ্যাপ ব্যবহার করা যাবে না।</p>
+    <div class="v19-version" id="v19UpdateVersion">Current: 1.1 · Required: 1.1</div>
+    <button id="v19UpdateButton" type="button">⬇️ Update Now</button>
+    <div class="v19-update-note" id="v19UpdateNote">Update link owner-এর update.json ফাইল থেকে নিয়ন্ত্রিত হবে।</div>
+  </div>
+</div>
+<style>#v17InstallBar{display:none;background:#fff;border:1px solid #dfe6e9;border-radius:12px;padding:12px;margin:10px 0}#v17InstallBar button{width:auto;margin:5px 5px 0 0}</style>
 <div id="v17InstallBar"><b>📱 অ্যাপ ইনস্টল করুন</b><div class="small">মোবাইলে App-এর মতো ব্যবহার করতে Install চাপুন।</div><button id="v17InstallBtn" type="button">⬇️ Install App</button><button id="v17UpdateBtn" type="button" style="display:none">🔄 Update App</button></div>
 <script>
 (()=>{let dp=null,b=document.getElementById("v17InstallBar"),ib=document.getElementById("v17InstallBtn"),ub=document.getElementById("v17UpdateBtn");
@@ -655,6 +674,7 @@ function renderSettings(){$("settingsBox").innerHTML=`
 <button class="secondary" style="width:100%;margin-bottom:8px" onclick="window.print()">🖨 Print / Save as PDF</button>
 <button class="danger" style="width:100%" onclick="localStorage.removeItem('scc_saved');renderSaved();renderHome()">Clear Saved Calculations</button>
 </div>
+<div class="v19-info"><b>📱 App Version & Update</b><div class="optional-note-v11">Current version: <b id="v19CurrentVersion">1.1</b></div><div class="optional-note-v11">App update status automatically checks the online <code>update.json</code> file. A mandatory update can block the old version until the latest version is installed.</div></div>
 <div class="warn" style="margin-top:12px"><b>Structural safety:</b> Footing, column, beam, slab and rebar outputs are preliminary estimating aids. They are not construction-ready structural designs. Final design must be checked by a qualified Structural Engineer using BNBC, soil report, loads, span, material grades and seismic/wind requirements.</div>
 <div class="notice" style="margin-top:12px"><b>AI Connection:</b> The standalone file does not contain a secret API key. For real online AI, connect a secure backend/API endpoint here rather than exposing a provider key inside the browser.</div>`}
 function askAI(){let q=$("aiQuestion").value.trim();if(!q)return;let chat=$("chat");chat.innerHTML+=`<div class="msg user"><b>You:</b> ${escapeHTML(q)}</div>`;let a=localAnswer(q);chat.innerHTML+=`<div class="msg ai"><b>AI Assistant:</b><br>${a}</div>`;$("aiQuestion").value="";chat.scrollTop=chat.scrollHeight}
@@ -1075,5 +1095,44 @@ function v16JobsPanel(){
 <p class="small">Admin backend-এ source approval, duplicate removal, category filter, deadline filter এবং manual publish control থাকবে।</p>
 <button class="v15-btn v15-primary" onclick="v16AdminLogin()">🔐 Secure Admin Login</button>
 </div>
+<script id="v19-mandatory-update">
+/* V19 mandatory update gate.
+   Publish update.json beside this app. Increase minVersion when an old version must be blocked. */
+(function(){
+  const APP_VERSION="1.1";
+  const UPDATE_INFO_URL="./update.json?ts="+Date.now();
+  const gate=document.getElementById("v19UpdateGate");
+  const btn=document.getElementById("v19UpdateButton");
+  const ver=document.getElementById("v19UpdateVersion");
+  const title=document.getElementById("v19UpdateTitle");
+  const text=document.getElementById("v19UpdateText");
+  const note=document.getElementById("v19UpdateNote");
+  function cmp(a,b){const A=String(a||"0").replace(/^v/i,"").split(".").map(Number);const B=String(b||"0").replace(/^v/i,"").split(".").map(Number);for(let i=0;i<Math.max(A.length,B.length);i++){const x=A[i]||0,y=B[i]||0;if(x!==y)return x-y}return 0}
+  function block(info){
+    gate.classList.add("show");
+    ver.textContent=`Current: ${APP_VERSION} · Required: ${info.minVersion||info.latestVersion||"new"}`;
+    title.textContent=info.title||"অ্যাপ আপডেট প্রয়োজন";
+    text.textContent=info.message||"এই অ্যাপের নতুন version পাওয়া গেছে। আপডেট না করা পর্যন্ত অ্যাপ ব্যবহার করা যাবে না।";
+    note.textContent=info.note||"Update link owner-এর update.json ফাইল থেকে নিয়ন্ত্রিত হবে।";
+    btn.textContent=info.buttonText||"⬇️ Update Now";
+    btn.onclick=()=>{const u=info.updateUrl||info.downloadUrl||"./";location.href=u;};
+  }
+  async function check(){
+    try{
+      const r=await fetch(UPDATE_INFO_URL,{cache:"no-store"});
+      if(!r.ok)return;
+      const info=await r.json();
+      if(info.enabled===false)return;
+      const required=info.minVersion||info.latestVersion;
+      if(required && cmp(APP_VERSION,required)<0)block(info);
+      const v=document.getElementById("v19CurrentVersion");if(v)v.textContent=APP_VERSION;
+    }catch(e){
+      /* Network failure does not lock the app; normal offline/PWA use continues. */
+    }
+  }
+  window.SAZZAD_APP_VERSION=APP_VERSION;
+  check();
+})();
+</script>
 </body>
 </html>

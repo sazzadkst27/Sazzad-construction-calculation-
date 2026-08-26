@@ -1,5 +1,5 @@
-const CACHE_VERSION="sazzad-calc-v13";
-const APP_SHELL=["./","./index.html","./manifest.json"];
+const CACHE_VERSION="sazzad-calc-v19";
+const APP_SHELL=["./","./index.html","./manifest.json","./update.json"];
 self.addEventListener("install",event=>{
  event.waitUntil(caches.open(CACHE_VERSION).then(c=>c.addAll(APP_SHELL)).then(()=>self.skipWaiting()));
 });
