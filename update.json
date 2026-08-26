@@ -1,11 +1,10 @@
 {
-  "enabled": true,
+  "appName": "Sazzad Construction Calculation",
   "latestVersion": "1.1",
   "minVersion": "1.1",
-  "updateUrl": "./",
-  "downloadUrl": "./",
-  "title": "অ্যাপ আপডেট প্রয়োজন",
-  "message": "এই অ্যাপের নতুন version পাওয়া গেলে পুরোনো version ব্যবহার বন্ধ করে দেওয়া যাবে। আপডেট করতে Update Now চাপুন।",
-  "buttonText": "⬇️ Update Now",
-  "note": "Owner update.json-এ minVersion বাড়ালে পুরোনো version আর ব্যবহার করা যাবে না।"
+  "updateUrl": "https://sazzadkst27.github.io/Sazzad-construction-calculation-/",
+  "downloadUrl": "https://sazzadkst27.github.io/Sazzad-construction-calculation-/",
+  "message": "নতুন version 1.1 available। আপডেট না করা পর্যন্ত এই পুরোনো version ব্যবহার করা যাবে না।",
+  "buttonText": "🔄 Update Now",
+  "note": "Update Now চাপলে নতুন version-এর hosted app খুলবে।"
 }

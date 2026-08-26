@@ -1134,5 +1134,31 @@ function v16JobsPanel(){
   check();
 })();
 </script>
+
+<style id="hide-home-extra-features">
+/* Hide optional job/update/admin tools from Home only */
+#ownerUpdateBox,
+#appHealthV12,
+#v15HomeJobs,
+#v15JobsRoot,
+#v15AdminRoot,
+#v16SecurityRoot,
+#v16OnlineRoot,
+#v16AdminFeed { display:none !important; }
+</style>
+
+<script id="hide-home-extra-features-js">
+(function(){
+  function hideHomeExtras(){
+    ["ownerUpdateBox","appHealthV12","v15HomeJobs","v15JobsRoot","v15AdminRoot","v16SecurityRoot","v16OnlineRoot","v16AdminFeed"].forEach(function(id){
+      var el=document.getElementById(id);
+      if(el) el.style.display="none";
+    });
+  }
+  if(document.readyState==="loading") document.addEventListener("DOMContentLoaded",hideHomeExtras);
+  else hideHomeExtras();
+  window.addEventListener("load",hideHomeExtras);
+})();
+</script>
 </body>
 </html>
